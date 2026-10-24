@@ -1,0 +1,4 @@
+id,orderId,status,reserved,observedAt
+W201-old,AD-201,picking,0,2026-10-20T16:00:00Z
+W103,AD-203,picking,3,2026-10-20T15:00:00Z
+W104,AD-202,dispatched,2,2026-10-23T15:00:00Z

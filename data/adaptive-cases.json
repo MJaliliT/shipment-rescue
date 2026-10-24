@@ -1,0 +1,95 @@
+{
+  "synthetic": true,
+  "asOf": "2026-10-23T17:00:00Z",
+  "orders": [
+    {
+      "id": "AD-201",
+      "sku": "PUMP-A",
+      "quantity": 4,
+      "promisedAt": "2026-10-24T17:00:00Z",
+      "priority": 1
+    },
+    {
+      "id": "AD-203",
+      "sku": "FILTER-C",
+      "quantity": 3,
+      "promisedAt": "2026-10-24T17:00:00Z",
+      "priority": 3
+    },
+    {
+      "id": "AD-202",
+      "sku": "PUMP-A",
+      "quantity": 2,
+      "promisedAt": "2026-10-24T17:00:00Z",
+      "priority": 4
+    }
+  ],
+  "carrier": [
+    {
+      "id": "C101",
+      "orderId": "AD-201",
+      "status": "label_created",
+      "eta": "2026-10-26T17:00:00Z",
+      "observedAt": "2026-10-23T16:00:00Z"
+    },
+    {
+      "id": "C104",
+      "orderId": "AD-202",
+      "status": "in_transit",
+      "eta": "2026-10-24T12:00:00Z",
+      "observedAt": "2026-10-23T16:00:00Z"
+    }
+  ],
+  "warehouse": [
+    {
+      "id": "W201-old",
+      "orderId": "AD-201",
+      "status": "picking",
+      "reserved": 0,
+      "observedAt": "2026-10-20T16:00:00Z"
+    },
+    {
+      "id": "W103",
+      "orderId": "AD-203",
+      "status": "picking",
+      "reserved": 3,
+      "observedAt": "2026-10-20T15:00:00Z"
+    },
+    {
+      "id": "W104",
+      "orderId": "AD-202",
+      "status": "dispatched",
+      "reserved": 2,
+      "observedAt": "2026-10-23T15:00:00Z"
+    }
+  ],
+  "inventory": [
+    {
+      "id": "I201-west",
+      "sku": "PUMP-A",
+      "warehouse": "West",
+      "available": 2,
+      "transferHours": 2,
+      "observedAt": "2026-10-23T16:30:00Z"
+    },
+    {
+      "id": "I201-east",
+      "sku": "PUMP-A",
+      "warehouse": "East",
+      "available": 6,
+      "transferHours": 6,
+      "observedAt": "2026-10-23T16:30:00Z"
+    }
+  ],
+  "updates": {
+    "warehouse": [
+      {
+        "id": "W201-current",
+        "orderId": "AD-201",
+        "status": "stockout",
+        "reserved": 0,
+        "observedAt": "2026-10-23T16:50:00Z"
+      }
+    ]
+  }
+}

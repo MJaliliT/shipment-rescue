@@ -1,0 +1,30 @@
+{
+  "synthetic": true,
+  "asOf": "2026-10-23T17:00:00Z",
+  "orders": [
+    {"id":"SR-101","sku":"PUMP-A","quantity":4,"promisedAt":"2026-10-24T17:00:00Z","priority":1},
+    {"id":"SR-102","sku":"VALVE-B","quantity":2,"promisedAt":"2026-10-24T17:00:00Z","priority":2},
+    {"id":"SR-103","sku":"FILTER-C","quantity":3,"promisedAt":"2026-10-24T17:00:00Z","priority":3},
+    {"id":"SR-104","sku":"PUMP-A","quantity":2,"promisedAt":"2026-10-24T17:00:00Z","priority":4},
+    {"id":"SR-105","sku":"SEAL-D","quantity":5,"promisedAt":"2026-10-24T17:00:00Z","priority":2}
+  ],
+  "carrier": [
+    {"id":"C101","orderId":"SR-101","status":"label_created","eta":"2026-10-26T17:00:00Z","observedAt":"2026-10-23T16:00:00Z"},
+    {"id":"C102","orderId":"SR-102","status":"in_transit","eta":"2026-10-26T17:00:00Z","observedAt":"2026-10-23T16:00:00Z"},
+    {"id":"C104","orderId":"SR-104","status":"in_transit","eta":"2026-10-24T12:00:00Z","observedAt":"2026-10-23T16:00:00Z"},
+    {"id":"C105","orderId":"SR-105","status":"label_created","eta":"2026-10-26T17:00:00Z","observedAt":"2026-10-23T16:00:00Z"}
+  ],
+  "warehouse": [
+    {"id":"W101","orderId":"SR-101","status":"stockout","reserved":0,"observedAt":"2026-10-23T16:30:00Z"},
+    {"id":"W102","orderId":"SR-102","status":"dispatched","reserved":2,"observedAt":"2026-10-23T15:00:00Z"},
+    {"id":"W103","orderId":"SR-103","status":"picking","reserved":3,"observedAt":"2026-10-20T15:00:00Z"},
+    {"id":"W104","orderId":"SR-104","status":"dispatched","reserved":2,"observedAt":"2026-10-23T15:00:00Z"},
+    {"id":"W105","orderId":"SR-105","status":"stockout","reserved":0,"observedAt":"2026-10-23T16:30:00Z"}
+  ],
+  "inventory": [
+    {"id":"I101","sku":"PUMP-A","warehouse":"West","available":7,"transferHours":8,"observedAt":"2026-10-23T16:30:00Z"},
+    {"id":"I102","sku":"VALVE-B","warehouse":"West","available":4,"transferHours":6,"observedAt":"2026-10-23T16:30:00Z"},
+    {"id":"I103","sku":"FILTER-C","warehouse":"West","available":10,"transferHours":4,"observedAt":"2026-10-20T16:30:00Z"},
+    {"id":"I105","sku":"SEAL-D","warehouse":"West","available":1,"transferHours":8,"observedAt":"2026-10-23T16:30:00Z"}
+  ]
+}

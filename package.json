@@ -1,0 +1,18 @@
+{
+  "name": "shipment-rescue",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "demo": "node --import tsx src/cli.ts demo",
+    "test": "node --import tsx --test tests/*.test.ts",
+    "investigate": "node --import tsx src/cli.ts investigate",
+    "doctor": "node --import tsx src/cli.ts doctor",
+    "evaluate": "node --import tsx evaluation/run.ts",
+    "verify": "node scripts/verify.mjs",
+    "adaptive": "node --import tsx src/cli.ts demo --adaptive"
+  },
+  "devDependencies": {
+    "tsx": "4.20.6"
+  }
+}

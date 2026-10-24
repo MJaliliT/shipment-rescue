@@ -1,0 +1,393 @@
+{
+  "createdAt": "2026-10-23T18:27:28.549Z",
+  "protocolHash": "2f1029a400753f61accb42b04b06cc72e20a57d8217e844470ee6465d6b59e45",
+  "synthetic": true,
+  "sourceTransport": "in-memory evaluation fixtures; not live Zetaris retrieval",
+  "scope": "3 representative model cases",
+  "live": true,
+  "requestedModel": "nvidia/nemotron-3.5-lightning-30b-a3b",
+  "thinking": "off",
+  "elapsedMs": 25946,
+  "passed": 3,
+  "total": 3,
+  "toolDecisions": 9,
+  "toolFallbacks": 0,
+  "reviewAgreements": 2,
+  "reviewFallbacks": 1,
+  "cases": [
+    {
+      "id": "E01-stockout",
+      "passed": true,
+      "expected": {
+        "cause": "warehouse_stockout",
+        "risk": "at_risk",
+        "action": "request_stock_reservation"
+      },
+      "actual": {
+        "cause": "warehouse_stockout",
+        "risk": "at_risk",
+        "action": "request_stock_reservation"
+      },
+      "ms": 6620,
+      "review": {
+        "status": "model_agreement",
+        "rounds": 1,
+        "proposals": 1,
+        "critiques": 1,
+        "errors": 0
+      },
+      "trace": [
+        {
+          "role": "investigator",
+          "event": "model_decision",
+          "tool": "carrier",
+          "reason": "Nightshift selected the carrier tool",
+          "requestedModel": "nvidia/nemotron-3.5-lightning-30b-a3b",
+          "reportedModel": "nvidia/nemotron-3.5-lightning-30b-a3b",
+          "fromCache": false,
+          "receiptId": "rcpt_req_1uecnp2u"
+        },
+        {
+          "role": "executor",
+          "event": "tool_result",
+          "tool": "carrier",
+          "recordIds": [
+            "EC1"
+          ]
+        },
+        {
+          "role": "investigator",
+          "event": "provisional_hypothesis",
+          "hypothesis": "Carrier feed indicates delay, but label creation does not prove carrier custody. Check warehouse before assigning cause."
+        },
+        {
+          "role": "investigator",
+          "event": "model_decision",
+          "tool": "inventory",
+          "reason": "Nightshift selected the inventory tool",
+          "requestedModel": "nvidia/nemotron-3.5-lightning-30b-a3b",
+          "reportedModel": "nvidia/nemotron-3.5-lightning-30b-a3b",
+          "fromCache": false,
+          "receiptId": "rcpt_req_cnos2aez"
+        },
+        {
+          "role": "executor",
+          "event": "tool_result",
+          "tool": "inventory",
+          "recordIds": [
+            "EI1"
+          ]
+        },
+        {
+          "role": "investigator",
+          "event": "model_decision",
+          "tool": "warehouse",
+          "reason": "Nightshift selected the warehouse tool",
+          "requestedModel": "nvidia/nemotron-3.5-lightning-30b-a3b",
+          "reportedModel": "nvidia/nemotron-3.5-lightning-30b-a3b",
+          "fromCache": false,
+          "receiptId": "rcpt_req_56p3y165"
+        },
+        {
+          "role": "executor",
+          "event": "tool_result",
+          "tool": "warehouse",
+          "recordIds": [
+            "EW1"
+          ]
+        },
+        {
+          "role": "verifier",
+          "event": "hypothesis_revised",
+          "from": "possible carrier delay",
+          "to": "warehouse_stockout",
+          "evidence": [
+            "EW1",
+            "EC1"
+          ]
+        },
+        {
+          "role": "investigator",
+          "event": "cause_proposal",
+          "round": 1,
+          "choice": "stockout",
+          "requestedModel": "nvidia/nemotron-3.5-lightning-30b-a3b",
+          "reportedModel": "nvidia/nemotron-3.5-lightning-30b-a3b",
+          "fromCache": false,
+          "receiptId": "rcpt_req_lizeic5n"
+        },
+        {
+          "role": "verifier",
+          "event": "model_critique",
+          "round": 1,
+          "choice": "accept",
+          "requestedModel": "nvidia/nemotron-3.5-lightning-30b-a3b",
+          "reportedModel": "nvidia/nemotron-3.5-lightning-30b-a3b",
+          "fromCache": false,
+          "receiptId": "rcpt_req_c57266wr",
+          "assessedCause": "stockout",
+          "evidenceGate": {
+            "supported": true,
+            "reason": "Consistent with current evidence gate"
+          }
+        }
+      ]
+    },
+    {
+      "id": "E02-carrier",
+      "passed": true,
+      "expected": {
+        "cause": "carrier_eta_delay",
+        "risk": "at_risk",
+        "action": "request_carrier_investigation"
+      },
+      "actual": {
+        "cause": "carrier_eta_delay",
+        "risk": "at_risk",
+        "action": "request_carrier_investigation"
+      },
+      "ms": 7996,
+      "review": {
+        "status": "model_agreement",
+        "rounds": 1,
+        "proposals": 1,
+        "critiques": 1,
+        "errors": 0
+      },
+      "trace": [
+        {
+          "role": "investigator",
+          "event": "model_decision",
+          "tool": "carrier",
+          "reason": "Nightshift selected the carrier tool",
+          "requestedModel": "nvidia/nemotron-3.5-lightning-30b-a3b",
+          "reportedModel": "nvidia/nemotron-3.5-lightning-30b-a3b",
+          "fromCache": false,
+          "receiptId": "rcpt_req_dmvletyd"
+        },
+        {
+          "role": "executor",
+          "event": "tool_result",
+          "tool": "carrier",
+          "recordIds": [
+            "EC1"
+          ]
+        },
+        {
+          "role": "investigator",
+          "event": "model_decision",
+          "tool": "warehouse",
+          "reason": "Nightshift selected the warehouse tool",
+          "requestedModel": "nvidia/nemotron-3.5-lightning-30b-a3b",
+          "reportedModel": "nvidia/nemotron-3.5-lightning-30b-a3b",
+          "fromCache": false,
+          "receiptId": "rcpt_req_sgxhn6f7"
+        },
+        {
+          "role": "executor",
+          "event": "tool_result",
+          "tool": "warehouse",
+          "recordIds": [
+            "EW1"
+          ]
+        },
+        {
+          "role": "investigator",
+          "event": "model_decision",
+          "tool": "inventory",
+          "reason": "Nightshift selected the inventory tool",
+          "requestedModel": "nvidia/nemotron-3.5-lightning-30b-a3b",
+          "reportedModel": "nvidia/nemotron-3.5-lightning-30b-a3b",
+          "fromCache": false,
+          "receiptId": "rcpt_req_dkhcwkrc"
+        },
+        {
+          "role": "executor",
+          "event": "tool_result",
+          "tool": "inventory",
+          "recordIds": [
+            "EI1"
+          ]
+        },
+        {
+          "role": "investigator",
+          "event": "cause_proposal",
+          "round": 1,
+          "choice": "carrier_delay",
+          "requestedModel": "nvidia/nemotron-3.5-lightning-30b-a3b",
+          "reportedModel": "nvidia/nemotron-3.5-lightning-30b-a3b",
+          "fromCache": false,
+          "receiptId": "rcpt_req_qcdwzuch"
+        },
+        {
+          "role": "verifier",
+          "event": "model_critique",
+          "round": 1,
+          "choice": "accept",
+          "requestedModel": "nvidia/nemotron-3.5-lightning-30b-a3b",
+          "reportedModel": "nvidia/nemotron-3.5-lightning-30b-a3b",
+          "fromCache": false,
+          "receiptId": "rcpt_req_7m3d77k6",
+          "assessedCause": "carrier_delay",
+          "evidenceGate": {
+            "supported": true,
+            "reason": "Consistent with current evidence gate"
+          }
+        }
+      ]
+    },
+    {
+      "id": "E04-missing",
+      "passed": true,
+      "expected": {
+        "cause": "unverified",
+        "risk": "unknown",
+        "action": "request_evidence"
+      },
+      "actual": {
+        "cause": "unverified",
+        "risk": "unknown",
+        "action": "request_evidence"
+      },
+      "ms": 11327,
+      "review": {
+        "status": "deterministic_review_fallback",
+        "rounds": 2,
+        "proposals": 2,
+        "critiques": 2,
+        "errors": 0
+      },
+      "trace": [
+        {
+          "role": "investigator",
+          "event": "model_decision",
+          "tool": "carrier",
+          "reason": "Nightshift selected the carrier tool",
+          "requestedModel": "nvidia/nemotron-3.5-lightning-30b-a3b",
+          "reportedModel": "nvidia/nemotron-3.5-lightning-30b-a3b",
+          "fromCache": false,
+          "receiptId": "rcpt_req_oyadknv4"
+        },
+        {
+          "role": "executor",
+          "event": "tool_result",
+          "tool": "carrier",
+          "recordIds": []
+        },
+        {
+          "role": "investigator",
+          "event": "model_decision",
+          "tool": "warehouse",
+          "reason": "Nightshift selected the warehouse tool",
+          "requestedModel": "nvidia/nemotron-3.5-lightning-30b-a3b",
+          "reportedModel": "nvidia/nemotron-3.5-lightning-30b-a3b",
+          "fromCache": false,
+          "receiptId": "rcpt_req_t8ti6hnm"
+        },
+        {
+          "role": "executor",
+          "event": "tool_result",
+          "tool": "warehouse",
+          "recordIds": [
+            "EW1"
+          ]
+        },
+        {
+          "role": "investigator",
+          "event": "model_decision",
+          "tool": "inventory",
+          "reason": "Nightshift selected the inventory tool",
+          "requestedModel": "nvidia/nemotron-3.5-lightning-30b-a3b",
+          "reportedModel": "nvidia/nemotron-3.5-lightning-30b-a3b",
+          "fromCache": false,
+          "receiptId": "rcpt_req_tynsmeer"
+        },
+        {
+          "role": "executor",
+          "event": "tool_result",
+          "tool": "inventory",
+          "recordIds": [
+            "EI1"
+          ]
+        },
+        {
+          "role": "investigator",
+          "event": "cause_proposal",
+          "round": 1,
+          "choice": "stockout",
+          "requestedModel": "nvidia/nemotron-3.5-lightning-30b-a3b",
+          "reportedModel": "nvidia/nemotron-3.5-lightning-30b-a3b",
+          "fromCache": false,
+          "receiptId": "rcpt_req_bm4j9bp5"
+        },
+        {
+          "role": "verifier",
+          "event": "model_critique",
+          "round": 1,
+          "choice": "accept",
+          "requestedModel": "nvidia/nemotron-3.5-lightning-30b-a3b",
+          "reportedModel": "nvidia/nemotron-3.5-lightning-30b-a3b",
+          "fromCache": false,
+          "receiptId": "rcpt_req_o82b9bw6",
+          "assessedCause": "stockout",
+          "evidenceGate": {
+            "supported": false,
+            "reason": "Proposal conflicts with current source evidence; revise. Expected evidence-backed category: unknown"
+          }
+        },
+        {
+          "role": "verifier",
+          "event": "revision_requested",
+          "round": 1,
+          "feedback": {
+            "priorProposal": "stockout",
+            "verdict": "reject",
+            "reason": "Proposal conflicts with current source evidence; revise. Expected evidence-backed category: unknown",
+            "reviewerVerdict": "accept"
+          }
+        },
+        {
+          "role": "investigator",
+          "event": "cause_proposal",
+          "round": 2,
+          "choice": "stockout",
+          "requestedModel": "nvidia/nemotron-3.5-lightning-30b-a3b",
+          "reportedModel": "nvidia/nemotron-3.5-lightning-30b-a3b",
+          "fromCache": false,
+          "receiptId": "rcpt_req_riv6vyqm"
+        },
+        {
+          "role": "verifier",
+          "event": "model_critique",
+          "round": 2,
+          "choice": "accept",
+          "requestedModel": "nvidia/nemotron-3.5-lightning-30b-a3b",
+          "reportedModel": "nvidia/nemotron-3.5-lightning-30b-a3b",
+          "fromCache": false,
+          "receiptId": "rcpt_req_hlhnbff6",
+          "assessedCause": "stockout",
+          "evidenceGate": {
+            "supported": false,
+            "reason": "Proposal conflicts with current source evidence; revise. Expected evidence-backed category: unknown"
+          }
+        },
+        {
+          "role": "verifier",
+          "event": "revision_requested",
+          "round": 2,
+          "feedback": {
+            "priorProposal": "stockout",
+            "verdict": "reject",
+            "reason": "Proposal conflicts with current source evidence; revise. Expected evidence-backed category: unknown",
+            "reviewerVerdict": "accept"
+          }
+        },
+        {
+          "role": "controller",
+          "event": "review_fallback",
+          "reason": "Bounded model review did not converge. Final classification uses the deterministic evidence gate; no model agreement claimed."
+        }
+      ]
+    }
+  ]
+}

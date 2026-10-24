@@ -1,0 +1,27 @@
+{
+  "createdAt": "2026-10-24T05:26:16.803Z",
+  "synthetic": true,
+  "scope": "credential-free technical verification; not submission certification",
+  "checks": [
+    {
+      "command": "test",
+      "passed": true,
+      "elapsedMs": 356
+    },
+    {
+      "command": "evaluate",
+      "passed": true,
+      "elapsedMs": 178
+    },
+    {
+      "command": "demo",
+      "passed": true,
+      "elapsedMs": 152
+    },
+    {
+      "command": "adaptive",
+      "passed": true,
+      "elapsedMs": 167
+    }
+  ]
+}

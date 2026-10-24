@@ -1,0 +1,707 @@
+[
+  {
+    "review": {
+      "status": "not_requested",
+      "rounds": 0,
+      "proposals": 0,
+      "critiques": 0,
+      "errors": 0
+    },
+    "modelExecution": {
+      "successfulDecisions": 0,
+      "failedDecisions": 0
+    },
+    "orderId": "SR-101",
+    "quantity": 4,
+    "promisedAt": "2026-10-24T17:00:00Z",
+    "sku": "PUMP-A",
+    "priority": 1,
+    "mode": "deterministic_sample",
+    "synthetic": true,
+    "asOf": "2026-10-23T17:00:00Z",
+    "risk": "at_risk",
+    "cause": "warehouse_stockout",
+    "summary": "Warehouse reports a stockout and the carrier has only a label; there is no evidence of carrier custody.",
+    "citations": [
+      "C101",
+      "W101"
+    ],
+    "gaps": [],
+    "actions": [
+      {
+        "type": "request_stock_reservation",
+        "status": "draft_requires_review",
+        "title": "Request 4 units from West",
+        "evidence": [
+          "C101",
+          "W101",
+          "I101"
+        ],
+        "detail": "Batch proposal: 7 units before this allocation, 3 after. Estimated 8h transfer plus an assumed 8h handling/delivery buffer. Confirm capacity, cutoffs and transit before commitment; no stock is reserved."
+      }
+    ],
+    "evidence": [
+      {
+        "id": "C101",
+        "orderId": "SR-101",
+        "status": "label_created",
+        "eta": "2026-10-26T17:00:00Z",
+        "observedAt": "2026-10-23T16:00:00Z",
+        "source": "carrier"
+      },
+      {
+        "id": "W101",
+        "orderId": "SR-101",
+        "status": "stockout",
+        "reserved": 0,
+        "observedAt": "2026-10-23T16:30:00Z",
+        "source": "warehouse"
+      },
+      {
+        "id": "I101",
+        "sku": "PUMP-A",
+        "warehouse": "West",
+        "available": 7,
+        "transferHours": 8,
+        "observedAt": "2026-10-23T16:30:00Z",
+        "source": "inventory"
+      }
+    ],
+    "trace": [
+      {
+        "role": "memory",
+        "event": "recall",
+        "context": "[MEMORY CONTEXT]\n## general\n- [WK] PUMP-A shipment SR-101: Warehouse reports a stockout and the carrier has only a label; there is no evidence of carrier custody. (entities: pump, warehouse) <mem-1>\n- [WK] PUMP-A shipment SR-101: Warehouse reports a stockout and the carrier has only a label; there is no evidence of carrier custody. (entities: pump, warehouse) <mem-5>\n- [WK] PUMP-A shipment SR-101: Warehouse reports a stockout and the carrier has only a label; there is no evidence of carrier custody. (entities: pump, warehouse) <mem-9>\n- [WK] PUMP-A shipment SR-104: Current carrier ETA meets the promise and warehouse confirms dispatch. (entities: pump, current, eta) <mem-11>\n- [WK] PUMP-A shipment SR-104: Current carrier ETA meets the promise and warehouse confirms dispatch. (entities: pump, current, eta) <mem-7>\n[/MEMORY CONTEXT]",
+        "ids": [
+          "mem-1",
+          "mem-5",
+          "mem-9",
+          "mem-11",
+          "mem-7"
+        ]
+      },
+      {
+        "role": "executor",
+        "event": "tool_result",
+        "tool": "carrier",
+        "recordIds": [
+          "C101"
+        ]
+      },
+      {
+        "role": "investigator",
+        "event": "provisional_hypothesis",
+        "hypothesis": "Carrier feed indicates delay, but label creation does not prove carrier custody. Check warehouse before assigning cause."
+      },
+      {
+        "role": "executor",
+        "event": "tool_result",
+        "tool": "warehouse",
+        "recordIds": [
+          "W101"
+        ]
+      },
+      {
+        "role": "executor",
+        "event": "tool_result",
+        "tool": "inventory",
+        "recordIds": [
+          "I101"
+        ]
+      },
+      {
+        "role": "verifier",
+        "event": "hypothesis_revised",
+        "from": "possible carrier delay",
+        "to": "warehouse_stockout",
+        "evidence": [
+          "W101",
+          "C101"
+        ]
+      },
+      {
+        "role": "planner",
+        "event": "draft_capacity_allocated",
+        "status": "proposed_only",
+        "poolKey": "[\"PUMP-A\",\"West\"]",
+        "quantity": 4,
+        "availableBefore": 7,
+        "availableAfter": 3,
+        "recordId": "I101"
+      }
+    ],
+    "memory": {
+      "engine": "Meterless H-MEM reference",
+      "recalled": [
+        {
+          "id": "mem-1",
+          "content": "PUMP-A shipment SR-101: Warehouse reports a stockout and the carrier has only a label; there is no evidence of carrier custody.",
+          "relevance": 0.37050509375572194
+        },
+        {
+          "id": "mem-5",
+          "content": "PUMP-A shipment SR-101: Warehouse reports a stockout and the carrier has only a label; there is no evidence of carrier custody.",
+          "relevance": 0.37050509375572194
+        },
+        {
+          "id": "mem-9",
+          "content": "PUMP-A shipment SR-101: Warehouse reports a stockout and the carrier has only a label; there is no evidence of carrier custody.",
+          "relevance": 0.37050509375572194
+        },
+        {
+          "id": "mem-11",
+          "content": "PUMP-A shipment SR-104: Current carrier ETA meets the promise and warehouse confirms dispatch.",
+          "relevance": 0.3268377030197198
+        },
+        {
+          "id": "mem-7",
+          "content": "PUMP-A shipment SR-104: Current carrier ETA meets the promise and warehouse confirms dispatch.",
+          "relevance": 0.3268377030197198
+        }
+      ]
+    },
+    "draftAllocation": {
+      "status": "proposed_only",
+      "poolKey": "[\"PUMP-A\",\"West\"]",
+      "quantity": 4,
+      "availableBefore": 7,
+      "availableAfter": 3
+    }
+  },
+  {
+    "review": {
+      "status": "not_requested",
+      "rounds": 0,
+      "proposals": 0,
+      "critiques": 0,
+      "errors": 0
+    },
+    "modelExecution": {
+      "successfulDecisions": 0,
+      "failedDecisions": 0
+    },
+    "orderId": "SR-102",
+    "quantity": 2,
+    "promisedAt": "2026-10-24T17:00:00Z",
+    "sku": "VALVE-B",
+    "priority": 2,
+    "mode": "deterministic_sample",
+    "synthetic": true,
+    "asOf": "2026-10-23T17:00:00Z",
+    "risk": "at_risk",
+    "cause": "carrier_eta_delay",
+    "summary": "Carrier ETA exceeds the promised delivery time after warehouse dispatch. The underlying cause of carrier delay is not established.",
+    "citations": [
+      "C102",
+      "W102"
+    ],
+    "gaps": [],
+    "actions": [
+      {
+        "type": "request_carrier_investigation",
+        "status": "draft_requires_review",
+        "title": "Request carrier exception review",
+        "evidence": [
+          "C102",
+          "W102"
+        ],
+        "detail": "Ask carrier for the reason and available delivery options; do not promise an expedited arrival."
+      }
+    ],
+    "evidence": [
+      {
+        "id": "C102",
+        "orderId": "SR-102",
+        "status": "in_transit",
+        "eta": "2026-10-26T17:00:00Z",
+        "observedAt": "2026-10-23T16:00:00Z",
+        "source": "carrier"
+      },
+      {
+        "id": "W102",
+        "orderId": "SR-102",
+        "status": "dispatched",
+        "reserved": 2,
+        "observedAt": "2026-10-23T15:00:00Z",
+        "source": "warehouse"
+      },
+      {
+        "id": "I102",
+        "sku": "VALVE-B",
+        "warehouse": "West",
+        "available": 4,
+        "transferHours": 6,
+        "observedAt": "2026-10-23T16:30:00Z",
+        "source": "inventory"
+      }
+    ],
+    "trace": [
+      {
+        "role": "memory",
+        "event": "recall",
+        "context": "[MEMORY CONTEXT]\n## general\n- [WK] VALVE-B shipment SR-102: Carrier ETA exceeds the promised delivery time after warehouse dispatch. The underlying cause of carrier delay is not established. (entities: valve, carrier, eta) <mem-10>\n- [WK] VALVE-B shipment SR-102: Carrier ETA exceeds the promised delivery time after warehouse dispatch. The underlying cause of carrier delay is not established. (entities: valve, carrier, eta) <mem-2>\n- [WK] VALVE-B shipment SR-102: Carrier ETA exceeds the promised delivery time after warehouse dispatch. The underlying cause of carrier delay is not established. (entities: valve, carrier, eta) <mem-6>\n- [WK] SEAL-D shipment SR-105: Warehouse reports a stockout and the carrier has only a label; there is no evidence of carrier custody. (entities: seal, warehouse) <mem-12>\n- [WK] SEAL-D shipment SR-105: Warehouse reports a stockout and the carrier has only a label; there is no evidence of carrier custody. (entities: seal, warehouse) <mem-4>\n[/MEMORY CONTEXT]",
+        "ids": [
+          "mem-10",
+          "mem-2",
+          "mem-6",
+          "mem-12",
+          "mem-4"
+        ]
+      },
+      {
+        "role": "executor",
+        "event": "tool_result",
+        "tool": "carrier",
+        "recordIds": [
+          "C102"
+        ]
+      },
+      {
+        "role": "executor",
+        "event": "tool_result",
+        "tool": "warehouse",
+        "recordIds": [
+          "W102"
+        ]
+      },
+      {
+        "role": "executor",
+        "event": "tool_result",
+        "tool": "inventory",
+        "recordIds": [
+          "I102"
+        ]
+      }
+    ],
+    "memory": {
+      "engine": "Meterless H-MEM reference",
+      "recalled": [
+        {
+          "id": "mem-10",
+          "content": "VALVE-B shipment SR-102: Carrier ETA exceeds the promised delivery time after warehouse dispatch. The underlying cause of carrier delay is not established.",
+          "relevance": 0.34630327702857894
+        },
+        {
+          "id": "mem-2",
+          "content": "VALVE-B shipment SR-102: Carrier ETA exceeds the promised delivery time after warehouse dispatch. The underlying cause of carrier delay is not established.",
+          "relevance": 0.34630327702857894
+        },
+        {
+          "id": "mem-6",
+          "content": "VALVE-B shipment SR-102: Carrier ETA exceeds the promised delivery time after warehouse dispatch. The underlying cause of carrier delay is not established.",
+          "relevance": 0.34630327702857894
+        },
+        {
+          "id": "mem-12",
+          "content": "SEAL-D shipment SR-105: Warehouse reports a stockout and the carrier has only a label; there is no evidence of carrier custody.",
+          "relevance": 0.267429304628796
+        },
+        {
+          "id": "mem-4",
+          "content": "SEAL-D shipment SR-105: Warehouse reports a stockout and the carrier has only a label; there is no evidence of carrier custody.",
+          "relevance": 0.267429304628796
+        }
+      ]
+    }
+  },
+  {
+    "review": {
+      "status": "not_requested",
+      "rounds": 0,
+      "proposals": 0,
+      "critiques": 0,
+      "errors": 0
+    },
+    "modelExecution": {
+      "successfulDecisions": 0,
+      "failedDecisions": 0
+    },
+    "orderId": "SR-105",
+    "quantity": 5,
+    "promisedAt": "2026-10-24T17:00:00Z",
+    "sku": "SEAL-D",
+    "priority": 2,
+    "mode": "deterministic_sample",
+    "synthetic": true,
+    "asOf": "2026-10-23T17:00:00Z",
+    "risk": "at_risk",
+    "cause": "warehouse_stockout",
+    "summary": "Warehouse reports a stockout and the carrier has only a label; there is no evidence of carrier custody.",
+    "citations": [
+      "C105",
+      "W105"
+    ],
+    "gaps": [],
+    "actions": [
+      {
+        "type": "escalate_stockout",
+        "status": "draft_requires_review",
+        "title": "Escalate stockout: no feasible unallocated stock",
+        "evidence": [
+          "C105",
+          "W105"
+        ],
+        "detail": "Current stock, prior higher-priority draft allocations, freshness and the assumed delivery buffer leave no feasible complete recovery. No real stock was reserved."
+      }
+    ],
+    "evidence": [
+      {
+        "id": "C105",
+        "orderId": "SR-105",
+        "status": "label_created",
+        "eta": "2026-10-26T17:00:00Z",
+        "observedAt": "2026-10-23T16:00:00Z",
+        "source": "carrier"
+      },
+      {
+        "id": "W105",
+        "orderId": "SR-105",
+        "status": "stockout",
+        "reserved": 0,
+        "observedAt": "2026-10-23T16:30:00Z",
+        "source": "warehouse"
+      },
+      {
+        "id": "I105",
+        "sku": "SEAL-D",
+        "warehouse": "West",
+        "available": 1,
+        "transferHours": 8,
+        "observedAt": "2026-10-23T16:30:00Z",
+        "source": "inventory"
+      }
+    ],
+    "trace": [
+      {
+        "role": "memory",
+        "event": "recall",
+        "context": "[MEMORY CONTEXT]\n## general\n- [WK] SEAL-D shipment SR-105: Warehouse reports a stockout and the carrier has only a label; there is no evidence of carrier custody. (entities: seal, warehouse) <mem-12>\n- [WK] SEAL-D shipment SR-105: Warehouse reports a stockout and the carrier has only a label; there is no evidence of carrier custody. (entities: seal, warehouse) <mem-4>\n- [WK] SEAL-D shipment SR-105: Warehouse reports a stockout and the carrier has only a label; there is no evidence of carrier custody. (entities: seal, warehouse) <mem-8>\n- [WK] VALVE-B shipment SR-102: Carrier ETA exceeds the promised delivery time after warehouse dispatch. The underlying cause of carrier delay is not established. (entities: valve, carrier, eta) <mem-10>\n- [WK] VALVE-B shipment SR-102: Carrier ETA exceeds the promised delivery time after warehouse dispatch. The underlying cause of carrier delay is not established. (entities: valve, carrier, eta) <mem-14>\n[/MEMORY CONTEXT]",
+        "ids": [
+          "mem-12",
+          "mem-4",
+          "mem-8",
+          "mem-10",
+          "mem-14"
+        ]
+      },
+      {
+        "role": "executor",
+        "event": "tool_result",
+        "tool": "carrier",
+        "recordIds": [
+          "C105"
+        ]
+      },
+      {
+        "role": "investigator",
+        "event": "provisional_hypothesis",
+        "hypothesis": "Carrier feed indicates delay, but label creation does not prove carrier custody. Check warehouse before assigning cause."
+      },
+      {
+        "role": "executor",
+        "event": "tool_result",
+        "tool": "warehouse",
+        "recordIds": [
+          "W105"
+        ]
+      },
+      {
+        "role": "executor",
+        "event": "tool_result",
+        "tool": "inventory",
+        "recordIds": [
+          "I105"
+        ]
+      },
+      {
+        "role": "verifier",
+        "event": "hypothesis_revised",
+        "from": "possible carrier delay",
+        "to": "warehouse_stockout",
+        "evidence": [
+          "W105",
+          "C105"
+        ]
+      }
+    ],
+    "memory": {
+      "engine": "Meterless H-MEM reference",
+      "recalled": [
+        {
+          "id": "mem-12",
+          "content": "SEAL-D shipment SR-105: Warehouse reports a stockout and the carrier has only a label; there is no evidence of carrier custody.",
+          "relevance": 0.35177306431165234
+        },
+        {
+          "id": "mem-4",
+          "content": "SEAL-D shipment SR-105: Warehouse reports a stockout and the carrier has only a label; there is no evidence of carrier custody.",
+          "relevance": 0.35177306431165234
+        },
+        {
+          "id": "mem-8",
+          "content": "SEAL-D shipment SR-105: Warehouse reports a stockout and the carrier has only a label; there is no evidence of carrier custody.",
+          "relevance": 0.35177128141488545
+        },
+        {
+          "id": "mem-10",
+          "content": "VALVE-B shipment SR-102: Carrier ETA exceeds the promised delivery time after warehouse dispatch. The underlying cause of carrier delay is not established.",
+          "relevance": 0.30511487804825466
+        },
+        {
+          "id": "mem-14",
+          "content": "VALVE-B shipment SR-102: Carrier ETA exceeds the promised delivery time after warehouse dispatch. The underlying cause of carrier delay is not established.",
+          "relevance": 0.30511487804825466
+        }
+      ]
+    },
+    "draftAllocation": null
+  },
+  {
+    "review": {
+      "status": "not_requested",
+      "rounds": 0,
+      "proposals": 0,
+      "critiques": 0,
+      "errors": 0
+    },
+    "modelExecution": {
+      "successfulDecisions": 0,
+      "failedDecisions": 0
+    },
+    "orderId": "SR-103",
+    "quantity": 3,
+    "promisedAt": "2026-10-24T17:00:00Z",
+    "sku": "FILTER-C",
+    "priority": 3,
+    "mode": "deterministic_sample",
+    "synthetic": true,
+    "asOf": "2026-10-23T17:00:00Z",
+    "risk": "unknown",
+    "cause": "unverified",
+    "summary": "Insufficient current evidence to assign a cause.",
+    "citations": [],
+    "gaps": [
+      "Carrier evidence unavailable",
+      "Warehouse evidence is over 24 hours old"
+    ],
+    "actions": [
+      {
+        "type": "request_evidence",
+        "status": "draft_requires_review",
+        "title": "Obtain current handoff and shipment evidence",
+        "evidence": [],
+        "detail": "Carrier evidence unavailable; Warehouse evidence is over 24 hours old"
+      }
+    ],
+    "evidence": [
+      {
+        "id": "W103",
+        "orderId": "SR-103",
+        "status": "picking",
+        "reserved": 3,
+        "observedAt": "2026-10-20T15:00:00Z",
+        "source": "warehouse"
+      },
+      {
+        "id": "I103",
+        "sku": "FILTER-C",
+        "warehouse": "West",
+        "available": 10,
+        "transferHours": 4,
+        "observedAt": "2026-10-20T16:30:00Z",
+        "source": "inventory"
+      }
+    ],
+    "trace": [
+      {
+        "role": "memory",
+        "event": "recall",
+        "context": "[MEMORY CONTEXT]\n## general\n- [WK] VALVE-B shipment SR-102: Carrier ETA exceeds the promised delivery time after warehouse dispatch. The underlying cause of carrier delay is not established. (entities: valve, carrier, eta) <mem-10>\n- [WK] VALVE-B shipment SR-102: Carrier ETA exceeds the promised delivery time after warehouse dispatch. The underlying cause of carrier delay is not established. (entities: valve, carrier, eta) <mem-14>\n- [WK] VALVE-B shipment SR-102: Carrier ETA exceeds the promised delivery time after warehouse dispatch. The underlying cause of carrier delay is not established. (entities: valve, carrier, eta) <mem-2>\n- [WK] VALVE-B shipment SR-102: Carrier ETA exceeds the promised delivery time after warehouse dispatch. The underlying cause of carrier delay is not established. (entities: valve, carrier, eta) <mem-6>\n- [WK] SEAL-D shipment SR-105: Warehouse reports a stockout and the carrier has only a label; there is no evidence of carrier custody. (entities: seal, warehouse) <mem-12>\n[/MEMORY CONTEXT]",
+        "ids": [
+          "mem-10",
+          "mem-14",
+          "mem-2",
+          "mem-6",
+          "mem-12"
+        ]
+      },
+      {
+        "role": "executor",
+        "event": "tool_result",
+        "tool": "carrier",
+        "recordIds": []
+      },
+      {
+        "role": "executor",
+        "event": "tool_result",
+        "tool": "warehouse",
+        "recordIds": [
+          "W103"
+        ]
+      },
+      {
+        "role": "executor",
+        "event": "tool_result",
+        "tool": "inventory",
+        "recordIds": [
+          "I103"
+        ]
+      }
+    ],
+    "memory": {
+      "engine": "Meterless H-MEM reference",
+      "recalled": [
+        {
+          "id": "mem-10",
+          "content": "VALVE-B shipment SR-102: Carrier ETA exceeds the promised delivery time after warehouse dispatch. The underlying cause of carrier delay is not established.",
+          "relevance": 0.30336734634934476
+        },
+        {
+          "id": "mem-14",
+          "content": "VALVE-B shipment SR-102: Carrier ETA exceeds the promised delivery time after warehouse dispatch. The underlying cause of carrier delay is not established.",
+          "relevance": 0.30336734634934476
+        },
+        {
+          "id": "mem-2",
+          "content": "VALVE-B shipment SR-102: Carrier ETA exceeds the promised delivery time after warehouse dispatch. The underlying cause of carrier delay is not established.",
+          "relevance": 0.30336734634934476
+        },
+        {
+          "id": "mem-6",
+          "content": "VALVE-B shipment SR-102: Carrier ETA exceeds the promised delivery time after warehouse dispatch. The underlying cause of carrier delay is not established.",
+          "relevance": 0.30336734634934476
+        },
+        {
+          "id": "mem-12",
+          "content": "SEAL-D shipment SR-105: Warehouse reports a stockout and the carrier has only a label; there is no evidence of carrier custody.",
+          "relevance": 0.27361522103992336
+        }
+      ]
+    }
+  },
+  {
+    "review": {
+      "status": "not_requested",
+      "rounds": 0,
+      "proposals": 0,
+      "critiques": 0,
+      "errors": 0
+    },
+    "modelExecution": {
+      "successfulDecisions": 0,
+      "failedDecisions": 0
+    },
+    "orderId": "SR-104",
+    "quantity": 2,
+    "promisedAt": "2026-10-24T17:00:00Z",
+    "sku": "PUMP-A",
+    "priority": 4,
+    "mode": "deterministic_sample",
+    "synthetic": true,
+    "asOf": "2026-10-23T17:00:00Z",
+    "risk": "on_track",
+    "cause": "none",
+    "summary": "Current carrier ETA meets the promise and warehouse confirms dispatch.",
+    "citations": [
+      "C104",
+      "W104"
+    ],
+    "gaps": [],
+    "actions": [],
+    "evidence": [
+      {
+        "id": "C104",
+        "orderId": "SR-104",
+        "status": "in_transit",
+        "eta": "2026-10-24T12:00:00Z",
+        "observedAt": "2026-10-23T16:00:00Z",
+        "source": "carrier"
+      },
+      {
+        "id": "W104",
+        "orderId": "SR-104",
+        "status": "dispatched",
+        "reserved": 2,
+        "observedAt": "2026-10-23T15:00:00Z",
+        "source": "warehouse"
+      },
+      {
+        "id": "I101",
+        "sku": "PUMP-A",
+        "warehouse": "West",
+        "available": 7,
+        "transferHours": 8,
+        "observedAt": "2026-10-23T16:30:00Z",
+        "source": "inventory"
+      }
+    ],
+    "trace": [
+      {
+        "role": "memory",
+        "event": "recall",
+        "context": "[MEMORY CONTEXT]\n## general\n- [WK] PUMP-A shipment SR-101: Warehouse reports a stockout and the carrier has only a label; there is no evidence of carrier custody. (entities: pump, warehouse) <mem-13>\n- [WK] PUMP-A shipment SR-101: Warehouse reports a stockout and the carrier has only a label; there is no evidence of carrier custody. (entities: pump, warehouse) <mem-1>\n- [WK] PUMP-A shipment SR-101: Warehouse reports a stockout and the carrier has only a label; there is no evidence of carrier custody. (entities: pump, warehouse) <mem-5>\n- [WK] PUMP-A shipment SR-101: Warehouse reports a stockout and the carrier has only a label; there is no evidence of carrier custody. (entities: pump, warehouse) <mem-9>\n- [WK] PUMP-A shipment SR-104: Current carrier ETA meets the promise and warehouse confirms dispatch. (entities: pump, current, eta) <mem-7>\n[/MEMORY CONTEXT]",
+        "ids": [
+          "mem-13",
+          "mem-1",
+          "mem-5",
+          "mem-9",
+          "mem-7"
+        ]
+      },
+      {
+        "role": "executor",
+        "event": "tool_result",
+        "tool": "carrier",
+        "recordIds": [
+          "C104"
+        ]
+      },
+      {
+        "role": "executor",
+        "event": "tool_result",
+        "tool": "warehouse",
+        "recordIds": [
+          "W104"
+        ]
+      },
+      {
+        "role": "executor",
+        "event": "tool_result",
+        "tool": "inventory",
+        "recordIds": [
+          "I101"
+        ]
+      }
+    ],
+    "memory": {
+      "engine": "Meterless H-MEM reference",
+      "recalled": [
+        {
+          "id": "mem-13",
+          "content": "PUMP-A shipment SR-101: Warehouse reports a stockout and the carrier has only a label; there is no evidence of carrier custody.",
+          "relevance": 0.37050687615647915
+        },
+        {
+          "id": "mem-1",
+          "content": "PUMP-A shipment SR-101: Warehouse reports a stockout and the carrier has only a label; there is no evidence of carrier custody.",
+          "relevance": 0.3705068761234104
+        },
+        {
+          "id": "mem-5",
+          "content": "PUMP-A shipment SR-101: Warehouse reports a stockout and the carrier has only a label; there is no evidence of carrier custody.",
+          "relevance": 0.3705068761234104
+        },
+        {
+          "id": "mem-9",
+          "content": "PUMP-A shipment SR-101: Warehouse reports a stockout and the carrier has only a label; there is no evidence of carrier custody.",
+          "relevance": 0.3705068761234104
+        },
+        {
+          "id": "mem-7",
+          "content": "PUMP-A shipment SR-104: Current carrier ETA meets the promise and warehouse confirms dispatch.",
+          "relevance": 0.3268394853874097
+        }
+      ]
+    }
+  }
+]

@@ -1,0 +1,304 @@
+{
+  "synthetic": true,
+  "sourceTransport": "Zetaris JDBC",
+  "controller": "adaptive-v5",
+  "result": {
+    "review": {
+      "status": "model_agreement",
+      "rounds": 1,
+      "proposals": 1,
+      "critiques": 1,
+      "errors": 0
+    },
+    "modelExecution": {
+      "successfulDecisions": 0,
+      "failedDecisions": 1,
+      "successfulPlanningDecisions": 0,
+      "failedPlanningDecisions": 0
+    },
+    "workflow": {
+      "sourceAttempts": {
+        "carrier": 1,
+        "warehouse": 1,
+        "inventory": 1
+      },
+      "retrievals": 3,
+      "recoveryAttempts": 1,
+      "rejectedPlans": 0,
+      "tasks": [
+        {
+          "id": "SR-101:task:1",
+          "source": "carrier",
+          "attempt": 1,
+          "mode": "initial",
+          "reason": "Establish current handoff evidence; inventory is not needed until a stockout is supported",
+          "status": "completed"
+        },
+        {
+          "id": "SR-101:task:2",
+          "source": "warehouse",
+          "attempt": 1,
+          "mode": "initial",
+          "reason": "Establish current handoff evidence; inventory is not needed until a stockout is supported",
+          "status": "completed"
+        },
+        {
+          "id": "SR-101:task:3",
+          "source": "inventory",
+          "attempt": 1,
+          "mode": "initial",
+          "reason": "Supported warehouse stockout: obtain recovery candidates",
+          "status": "completed"
+        }
+      ],
+      "status": "resolved",
+      "batchRejectedPlans": 0
+    },
+    "orderId": "SR-101",
+    "quantity": 4,
+    "promisedAt": "2026-10-24T17:00:00Z",
+    "sku": "PUMP-A",
+    "priority": 1,
+    "mode": "nightshift_with_deterministic_verification",
+    "synthetic": true,
+    "asOf": "2026-10-23T17:00:00Z",
+    "risk": "at_risk",
+    "cause": "warehouse_stockout",
+    "summary": "Warehouse reports a stockout and the carrier has only a label; there is no evidence of carrier custody.",
+    "citations": [
+      "C101",
+      "W101"
+    ],
+    "gaps": [],
+    "actions": [
+      {
+        "type": "request_stock_reservation",
+        "status": "draft_requires_review",
+        "title": "Request 4 units from West",
+        "evidence": [
+          "C101",
+          "W101",
+          "I101"
+        ],
+        "detail": "Batch proposal: 7 units before this allocation, 3 after. Estimated 8h transfer plus an assumed 8h handling/delivery buffer. Confirm capacity, cutoffs and transit before commitment; no stock is reserved."
+      }
+    ],
+    "evidence": [
+      {
+        "id": "C101",
+        "orderId": "SR-101",
+        "status": "label_created",
+        "eta": "2026-10-26T17:00:00Z",
+        "observedAt": "2026-10-23T16:00:00Z",
+        "source": "carrier"
+      },
+      {
+        "id": "W101",
+        "orderId": "SR-101",
+        "status": "stockout",
+        "reserved": 0,
+        "observedAt": "2026-10-23T16:30:00Z",
+        "source": "warehouse"
+      },
+      {
+        "id": "I101",
+        "sku": "PUMP-A",
+        "warehouse": "West",
+        "available": 7,
+        "transferHours": 8,
+        "observedAt": "2026-10-23T16:30:00Z",
+        "source": "inventory"
+      }
+    ],
+    "trace": [
+      {
+        "role": "memory",
+        "event": "recall",
+        "context": "[MEMORY CONTEXT]\n## general\n- [WK] PUMP-A shipment SR-101: Warehouse reports a stockout and the carrier has only a label; there is no evidence of carrier custody. (entities: pump, warehouse) <mem-12>\n- [WK] PUMP-A shipment SR-101: Warehouse reports a stockout and the carrier has only a label; there is no evidence of carrier custody. (entities: pump, warehouse) <mem-1>\n- [WK] PUMP-A shipment SR-101: Warehouse reports a stockout and the carrier has only a label; there is no evidence of carrier custody. (entities: pump, warehouse) <mem-11>\n- [WK] PUMP-A shipment SR-101: Warehouse reports a stockout and the carrier has only a label; there is no evidence of carrier custody. (entities: pump, warehouse) <mem-2>\n- [WK] PUMP-A shipment SR-101: Warehouse reports a stockout and the carrier has only a label; there is no evidence of carrier custody. (entities: pump, warehouse) <mem-3>\n[/MEMORY CONTEXT]",
+        "ids": [
+          "mem-12",
+          "mem-1",
+          "mem-11",
+          "mem-2",
+          "mem-3"
+        ]
+      },
+      {
+        "role": "investigator",
+        "event": "model_error",
+        "fallback": "First pending evidence task; no task added outside the validated queue"
+      },
+      {
+        "role": "planner",
+        "event": "task_created",
+        "taskId": "SR-101:task:1",
+        "source": "carrier",
+        "attempt": 1,
+        "reason": "Establish current handoff evidence; inventory is not needed until a stockout is supported"
+      },
+      {
+        "role": "executor",
+        "event": "tool_result",
+        "tool": "carrier",
+        "taskId": "SR-101:task:1",
+        "attempt": 1,
+        "recordIds": [
+          "C101"
+        ],
+        "replacedRecordIds": [],
+        "retrieval": "source_reader"
+      },
+      {
+        "role": "investigator",
+        "event": "provisional_hypothesis",
+        "hypothesis": "A carrier label does not establish custody. Obtain current warehouse evidence before assigning cause."
+      },
+      {
+        "role": "planner",
+        "event": "task_created",
+        "taskId": "SR-101:task:2",
+        "source": "warehouse",
+        "attempt": 1,
+        "reason": "Establish current handoff evidence; inventory is not needed until a stockout is supported"
+      },
+      {
+        "role": "executor",
+        "event": "tool_result",
+        "tool": "warehouse",
+        "taskId": "SR-101:task:2",
+        "attempt": 1,
+        "recordIds": [
+          "W101"
+        ],
+        "replacedRecordIds": [],
+        "retrieval": "source_reader"
+      },
+      {
+        "role": "verifier",
+        "event": "hypothesis_revised",
+        "from": "possible carrier delay",
+        "to": "warehouse_stockout",
+        "evidence": [
+          "C101",
+          "W101"
+        ]
+      },
+      {
+        "role": "investigator",
+        "event": "cause_proposal",
+        "round": 1,
+        "choice": "stockout",
+        "requestedModel": "nvidia/nemotron-3.5-lightning-30b-a3b",
+        "reportedModel": "nvidia/nemotron-3.5-lightning-30b-a3b",
+        "fromCache": false,
+        "receiptId": "rcpt_req_et26bumj"
+      },
+      {
+        "role": "verifier",
+        "event": "model_critique",
+        "round": 1,
+        "choice": "accept",
+        "requestedModel": "nvidia/nemotron-3.5-lightning-30b-a3b",
+        "reportedModel": "nvidia/nemotron-3.5-lightning-30b-a3b",
+        "fromCache": false,
+        "receiptId": "rcpt_req_t69blflw",
+        "assessedCause": "stockout",
+        "evidenceGate": {
+          "supported": true,
+          "reason": "Consistent with current evidence gate"
+        }
+      },
+      {
+        "role": "planner",
+        "event": "task_created",
+        "taskId": "SR-101:task:3",
+        "source": "inventory",
+        "attempt": 1,
+        "reason": "Supported warehouse stockout: obtain recovery candidates"
+      },
+      {
+        "role": "executor",
+        "event": "tool_result",
+        "tool": "inventory",
+        "taskId": "SR-101:task:3",
+        "attempt": 1,
+        "recordIds": [
+          "I101"
+        ],
+        "replacedRecordIds": [],
+        "retrieval": "source_reader"
+      },
+      {
+        "role": "planner",
+        "event": "recovery_proposed",
+        "attempt": 1,
+        "generation": 1,
+        "warehouse": "West",
+        "recordId": "I101",
+        "quantity": 4
+      },
+      {
+        "role": "evaluator",
+        "event": "recovery_accepted",
+        "attempt": 1,
+        "warehouse": "West",
+        "recordId": "I101"
+      },
+      {
+        "role": "planner",
+        "event": "batch_recovery_proposed",
+        "warehouse": "West",
+        "recordId": "I101",
+        "quantity": 4
+      },
+      {
+        "role": "evaluator",
+        "event": "draft_capacity_allocated",
+        "status": "proposed_only",
+        "poolKey": "[\"PUMP-A\",\"West\"]",
+        "quantity": 4,
+        "availableBefore": 7,
+        "availableAfter": 3,
+        "recordId": "I101",
+        "warehouse": "West"
+      }
+    ],
+    "memory": {
+      "engine": "Meterless H-MEM reference",
+      "recalled": [
+        {
+          "id": "mem-12",
+          "content": "PUMP-A shipment SR-101: Warehouse reports a stockout and the carrier has only a label; there is no evidence of carrier custody.",
+          "relevance": 0.37047796554459045
+        },
+        {
+          "id": "mem-1",
+          "content": "PUMP-A shipment SR-101: Warehouse reports a stockout and the carrier has only a label; there is no evidence of carrier custody.",
+          "relevance": 0.3704777389895216
+        },
+        {
+          "id": "mem-11",
+          "content": "PUMP-A shipment SR-101: Warehouse reports a stockout and the carrier has only a label; there is no evidence of carrier custody.",
+          "relevance": 0.3704777389895216
+        },
+        {
+          "id": "mem-2",
+          "content": "PUMP-A shipment SR-101: Warehouse reports a stockout and the carrier has only a label; there is no evidence of carrier custody.",
+          "relevance": 0.3704777389895216
+        },
+        {
+          "id": "mem-3",
+          "content": "PUMP-A shipment SR-101: Warehouse reports a stockout and the carrier has only a label; there is no evidence of carrier custody.",
+          "relevance": 0.3704777389895216
+        }
+      ]
+    },
+    "draftAllocation": {
+      "status": "proposed_only",
+      "poolKey": "[\"PUMP-A\",\"West\"]",
+      "quantity": 4,
+      "availableBefore": 7,
+      "availableAfter": 3
+    }
+  }
+}

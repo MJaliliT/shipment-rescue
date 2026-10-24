@@ -1,0 +1,1185 @@
+{
+  "minIntervalMs": 1600,
+  "thinking": "off",
+  "requestedModel": "nvidia/nemotron-3.5-lightning-30b-a3b",
+  "protocolHash": "b9db28fe8032db422080691c317bf5ce6b2d1da98a88a66a1b351aa8e8991127",
+  "createdAt": "2026-10-23T18:47:12.422Z",
+  "synthetic": true,
+  "sourceTransport": "in-memory evaluation fixtures; not live Zetaris retrieval",
+  "scope": "6 synthetic cases frozen after v4 prompt, before first live run",
+  "live": true,
+  "elapsedMs": 33828,
+  "passed": 6,
+  "total": 6,
+  "toolDecisions": 6,
+  "toolFallbacks": 0,
+  "reviewAgreements": 4,
+  "reviewFallbacks": 2,
+  "results": [
+    {
+      "id": "H01-renamed-stockout",
+      "passed": true,
+      "expected": {
+        "cause": "warehouse_stockout",
+        "risk": "at_risk",
+        "action": "request_stock_reservation"
+      },
+      "actual": {
+        "cause": "warehouse_stockout",
+        "risk": "at_risk",
+        "action": "request_stock_reservation"
+      },
+      "ms": 3413,
+      "modelExecution": {
+        "successfulDecisions": 1,
+        "failedDecisions": 0,
+        "successfulPlanningDecisions": 0,
+        "failedPlanningDecisions": 0
+      },
+      "review": {
+        "status": "model_agreement",
+        "rounds": 1,
+        "proposals": 1,
+        "critiques": 1,
+        "errors": 0
+      },
+      "workflow": {
+        "sourceAttempts": {
+          "carrier": 1,
+          "warehouse": 1,
+          "inventory": 1
+        },
+        "retrievals": 3,
+        "recoveryAttempts": 1,
+        "rejectedPlans": 0,
+        "tasks": [
+          {
+            "id": "H01-renamed-stockout:task:1",
+            "source": "carrier",
+            "attempt": 1,
+            "mode": "initial",
+            "reason": "Establish current handoff evidence; inventory is not needed until a stockout is supported",
+            "status": "completed"
+          },
+          {
+            "id": "H01-renamed-stockout:task:2",
+            "source": "warehouse",
+            "attempt": 1,
+            "mode": "initial",
+            "reason": "Establish current handoff evidence; inventory is not needed until a stockout is supported",
+            "status": "completed"
+          },
+          {
+            "id": "H01-renamed-stockout:task:3",
+            "source": "inventory",
+            "attempt": 1,
+            "mode": "initial",
+            "reason": "Supported warehouse stockout: obtain recovery candidates",
+            "status": "completed"
+          }
+        ],
+        "status": "resolved"
+      },
+      "trace": [
+        {
+          "role": "investigator",
+          "event": "model_decision",
+          "tool": "carrier",
+          "reason": "Nightshift selected the carrier tool",
+          "requestedModel": "nvidia/nemotron-3.5-lightning-30b-a3b",
+          "reportedModel": "nvidia/nemotron-3.5-lightning-30b-a3b",
+          "fromCache": false,
+          "receiptId": "rcpt_req_sl8k5ijt"
+        },
+        {
+          "role": "planner",
+          "event": "task_created",
+          "taskId": "H01-renamed-stockout:task:1",
+          "source": "carrier",
+          "attempt": 1,
+          "reason": "Establish current handoff evidence; inventory is not needed until a stockout is supported"
+        },
+        {
+          "role": "executor",
+          "event": "tool_result",
+          "tool": "carrier",
+          "taskId": "H01-renamed-stockout:task:1",
+          "attempt": 1,
+          "recordIds": [
+            "C101"
+          ],
+          "replacedRecordIds": [],
+          "retrieval": "fixture_snapshot"
+        },
+        {
+          "role": "investigator",
+          "event": "provisional_hypothesis",
+          "hypothesis": "A carrier label does not establish custody. Obtain current warehouse evidence before assigning cause."
+        },
+        {
+          "role": "planner",
+          "event": "task_created",
+          "taskId": "H01-renamed-stockout:task:2",
+          "source": "warehouse",
+          "attempt": 1,
+          "reason": "Establish current handoff evidence; inventory is not needed until a stockout is supported"
+        },
+        {
+          "role": "executor",
+          "event": "tool_result",
+          "tool": "warehouse",
+          "taskId": "H01-renamed-stockout:task:2",
+          "attempt": 1,
+          "recordIds": [
+            "W101"
+          ],
+          "replacedRecordIds": [],
+          "retrieval": "fixture_snapshot"
+        },
+        {
+          "role": "verifier",
+          "event": "hypothesis_revised",
+          "from": "possible carrier delay",
+          "to": "warehouse_stockout",
+          "evidence": [
+            "C101",
+            "W101"
+          ]
+        },
+        {
+          "role": "investigator",
+          "event": "cause_proposal",
+          "round": 1,
+          "choice": "stockout",
+          "requestedModel": "nvidia/nemotron-3.5-lightning-30b-a3b",
+          "reportedModel": "nvidia/nemotron-3.5-lightning-30b-a3b",
+          "fromCache": false,
+          "receiptId": "rcpt_req_ir6tu62k"
+        },
+        {
+          "role": "verifier",
+          "event": "model_critique",
+          "round": 1,
+          "choice": "accept",
+          "requestedModel": "nvidia/nemotron-3.5-lightning-30b-a3b",
+          "reportedModel": "nvidia/nemotron-3.5-lightning-30b-a3b",
+          "fromCache": false,
+          "receiptId": "rcpt_req_tx7f4tyl",
+          "assessedCause": "stockout",
+          "evidenceGate": {
+            "supported": true,
+            "reason": "Consistent with current evidence gate"
+          }
+        },
+        {
+          "role": "planner",
+          "event": "task_created",
+          "taskId": "H01-renamed-stockout:task:3",
+          "source": "inventory",
+          "attempt": 1,
+          "reason": "Supported warehouse stockout: obtain recovery candidates"
+        },
+        {
+          "role": "executor",
+          "event": "tool_result",
+          "tool": "inventory",
+          "taskId": "H01-renamed-stockout:task:3",
+          "attempt": 1,
+          "recordIds": [
+            "I101"
+          ],
+          "replacedRecordIds": [],
+          "retrieval": "fixture_snapshot"
+        },
+        {
+          "role": "planner",
+          "event": "recovery_proposed",
+          "attempt": 1,
+          "generation": 1,
+          "warehouse": "West",
+          "recordId": "I101",
+          "quantity": 4
+        },
+        {
+          "role": "evaluator",
+          "event": "recovery_accepted",
+          "attempt": 1,
+          "warehouse": "West",
+          "recordId": "I101"
+        }
+      ]
+    },
+    {
+      "id": "H02-missing-warehouse",
+      "passed": true,
+      "expected": {
+        "cause": "unverified",
+        "risk": "unknown",
+        "action": "request_evidence"
+      },
+      "actual": {
+        "cause": "unverified",
+        "risk": "unknown",
+        "action": "request_evidence"
+      },
+      "ms": 8900,
+      "modelExecution": {
+        "successfulDecisions": 1,
+        "failedDecisions": 0,
+        "successfulPlanningDecisions": 0,
+        "failedPlanningDecisions": 0
+      },
+      "review": {
+        "status": "deterministic_review_fallback",
+        "rounds": 2,
+        "proposals": 2,
+        "critiques": 2,
+        "errors": 0
+      },
+      "workflow": {
+        "sourceAttempts": {
+          "carrier": 1,
+          "warehouse": 2,
+          "inventory": 0
+        },
+        "retrievals": 3,
+        "recoveryAttempts": 0,
+        "rejectedPlans": 0,
+        "tasks": [
+          {
+            "id": "H02-missing-warehouse:task:1",
+            "source": "carrier",
+            "attempt": 1,
+            "mode": "initial",
+            "reason": "Establish current handoff evidence; inventory is not needed until a stockout is supported",
+            "status": "completed"
+          },
+          {
+            "id": "H02-missing-warehouse:task:2",
+            "source": "warehouse",
+            "attempt": 1,
+            "mode": "initial",
+            "reason": "Establish current handoff evidence; inventory is not needed until a stockout is supported",
+            "status": "completed"
+          },
+          {
+            "id": "H02-missing-warehouse:task:3",
+            "source": "warehouse",
+            "attempt": 2,
+            "mode": "refresh",
+            "reason": "warehouse: missing \u2014 warehouse evidence unavailable",
+            "status": "completed"
+          }
+        ],
+        "status": "escalated"
+      },
+      "trace": [
+        {
+          "role": "investigator",
+          "event": "model_decision",
+          "tool": "carrier",
+          "reason": "Nightshift selected the carrier tool",
+          "requestedModel": "nvidia/nemotron-3.5-lightning-30b-a3b",
+          "reportedModel": "nvidia/nemotron-3.5-lightning-30b-a3b",
+          "fromCache": false,
+          "receiptId": "rcpt_req_4fa5p2y2"
+        },
+        {
+          "role": "planner",
+          "event": "task_created",
+          "taskId": "H02-missing-warehouse:task:1",
+          "source": "carrier",
+          "attempt": 1,
+          "reason": "Establish current handoff evidence; inventory is not needed until a stockout is supported"
+        },
+        {
+          "role": "executor",
+          "event": "tool_result",
+          "tool": "carrier",
+          "taskId": "H02-missing-warehouse:task:1",
+          "attempt": 1,
+          "recordIds": [
+            "C102"
+          ],
+          "replacedRecordIds": [],
+          "retrieval": "fixture_snapshot"
+        },
+        {
+          "role": "planner",
+          "event": "task_created",
+          "taskId": "H02-missing-warehouse:task:2",
+          "source": "warehouse",
+          "attempt": 1,
+          "reason": "Establish current handoff evidence; inventory is not needed until a stockout is supported"
+        },
+        {
+          "role": "executor",
+          "event": "tool_result",
+          "tool": "warehouse",
+          "taskId": "H02-missing-warehouse:task:2",
+          "attempt": 1,
+          "recordIds": [],
+          "replacedRecordIds": [],
+          "retrieval": "fixture_snapshot"
+        },
+        {
+          "role": "evaluator",
+          "event": "evidence_rejected",
+          "issues": [
+            {
+              "source": "warehouse",
+              "code": "missing",
+              "reason": "warehouse evidence unavailable"
+            }
+          ]
+        },
+        {
+          "role": "planner",
+          "event": "task_created",
+          "taskId": "H02-missing-warehouse:task:3",
+          "source": "warehouse",
+          "attempt": 2,
+          "reason": "warehouse: missing \u2014 warehouse evidence unavailable"
+        },
+        {
+          "role": "executor",
+          "event": "tool_result",
+          "tool": "warehouse",
+          "taskId": "H02-missing-warehouse:task:3",
+          "attempt": 2,
+          "recordIds": [],
+          "replacedRecordIds": [],
+          "retrieval": "fixture_snapshot"
+        },
+        {
+          "role": "evaluator",
+          "event": "evidence_rejected",
+          "issues": [
+            {
+              "source": "warehouse",
+              "code": "missing",
+              "reason": "warehouse evidence unavailable"
+            }
+          ]
+        },
+        {
+          "role": "controller",
+          "event": "evidence_escalated",
+          "reason": "Required evidence remains unresolved after two attempts per source"
+        },
+        {
+          "role": "investigator",
+          "event": "cause_proposal",
+          "round": 1,
+          "choice": "carrier_delay",
+          "requestedModel": "nvidia/nemotron-3.5-lightning-30b-a3b",
+          "reportedModel": "nvidia/nemotron-3.5-lightning-30b-a3b",
+          "fromCache": false,
+          "receiptId": "rcpt_req_hendnhgu"
+        },
+        {
+          "role": "verifier",
+          "event": "model_critique",
+          "round": 1,
+          "choice": "accept",
+          "requestedModel": "nvidia/nemotron-3.5-lightning-30b-a3b",
+          "reportedModel": "nvidia/nemotron-3.5-lightning-30b-a3b",
+          "fromCache": false,
+          "receiptId": "rcpt_req_cbc56pkz",
+          "assessedCause": "carrier_delay",
+          "evidenceGate": {
+            "supported": false,
+            "reason": "Proposal conflicts with current source evidence. Recheck missing/stale/conflicting observations and the handoff state; revise using source facts."
+          }
+        },
+        {
+          "role": "verifier",
+          "event": "revision_requested",
+          "round": 1,
+          "feedback": {
+            "priorProposal": "carrier_delay",
+            "verdict": "reject",
+            "reason": "Proposal conflicts with current source evidence. Recheck missing/stale/conflicting observations and the handoff state; revise using source facts.",
+            "reviewerVerdict": "accept"
+          }
+        },
+        {
+          "role": "investigator",
+          "event": "cause_proposal",
+          "round": 2,
+          "choice": "carrier_delay",
+          "requestedModel": "nvidia/nemotron-3.5-lightning-30b-a3b",
+          "reportedModel": "nvidia/nemotron-3.5-lightning-30b-a3b",
+          "fromCache": false,
+          "receiptId": "rcpt_req_1x9lcpax"
+        },
+        {
+          "role": "verifier",
+          "event": "model_critique",
+          "round": 2,
+          "choice": "accept",
+          "requestedModel": "nvidia/nemotron-3.5-lightning-30b-a3b",
+          "reportedModel": "nvidia/nemotron-3.5-lightning-30b-a3b",
+          "fromCache": false,
+          "receiptId": "rcpt_req_k5pyn3dq",
+          "assessedCause": "carrier_delay",
+          "evidenceGate": {
+            "supported": false,
+            "reason": "Proposal conflicts with current source evidence. Recheck missing/stale/conflicting observations and the handoff state; revise using source facts."
+          }
+        },
+        {
+          "role": "verifier",
+          "event": "revision_requested",
+          "round": 2,
+          "feedback": {
+            "priorProposal": "carrier_delay",
+            "verdict": "reject",
+            "reason": "Proposal conflicts with current source evidence. Recheck missing/stale/conflicting observations and the handoff state; revise using source facts.",
+            "reviewerVerdict": "accept"
+          }
+        },
+        {
+          "role": "controller",
+          "event": "review_fallback",
+          "reason": "Bounded model review did not converge. Final classification uses the deterministic evidence gate; no model agreement claimed."
+        }
+      ]
+    },
+    {
+      "id": "H03-overdue",
+      "passed": true,
+      "expected": {
+        "cause": "delivery_overdue",
+        "risk": "at_risk",
+        "action": "request_carrier_investigation"
+      },
+      "actual": {
+        "cause": "delivery_overdue",
+        "risk": "at_risk",
+        "action": "request_carrier_investigation"
+      },
+      "ms": 3878,
+      "modelExecution": {
+        "successfulDecisions": 1,
+        "failedDecisions": 0,
+        "successfulPlanningDecisions": 0,
+        "failedPlanningDecisions": 0
+      },
+      "review": {
+        "status": "model_agreement",
+        "rounds": 1,
+        "proposals": 1,
+        "critiques": 1,
+        "errors": 0
+      },
+      "workflow": {
+        "sourceAttempts": {
+          "carrier": 1,
+          "warehouse": 1,
+          "inventory": 0
+        },
+        "retrievals": 2,
+        "recoveryAttempts": 0,
+        "rejectedPlans": 0,
+        "tasks": [
+          {
+            "id": "H03-overdue:task:1",
+            "source": "carrier",
+            "attempt": 1,
+            "mode": "initial",
+            "reason": "Establish current handoff evidence; inventory is not needed until a stockout is supported",
+            "status": "completed"
+          },
+          {
+            "id": "H03-overdue:task:2",
+            "source": "warehouse",
+            "attempt": 1,
+            "mode": "initial",
+            "reason": "Establish current handoff evidence; inventory is not needed until a stockout is supported",
+            "status": "completed"
+          }
+        ],
+        "status": "resolved"
+      },
+      "trace": [
+        {
+          "role": "investigator",
+          "event": "model_decision",
+          "tool": "carrier",
+          "reason": "Nightshift selected the carrier tool",
+          "requestedModel": "nvidia/nemotron-3.5-lightning-30b-a3b",
+          "reportedModel": "nvidia/nemotron-3.5-lightning-30b-a3b",
+          "fromCache": false,
+          "receiptId": "rcpt_req_7wtmny8l"
+        },
+        {
+          "role": "planner",
+          "event": "task_created",
+          "taskId": "H03-overdue:task:1",
+          "source": "carrier",
+          "attempt": 1,
+          "reason": "Establish current handoff evidence; inventory is not needed until a stockout is supported"
+        },
+        {
+          "role": "executor",
+          "event": "tool_result",
+          "tool": "carrier",
+          "taskId": "H03-overdue:task:1",
+          "attempt": 1,
+          "recordIds": [
+            "C104"
+          ],
+          "replacedRecordIds": [],
+          "retrieval": "fixture_snapshot"
+        },
+        {
+          "role": "planner",
+          "event": "task_created",
+          "taskId": "H03-overdue:task:2",
+          "source": "warehouse",
+          "attempt": 1,
+          "reason": "Establish current handoff evidence; inventory is not needed until a stockout is supported"
+        },
+        {
+          "role": "executor",
+          "event": "tool_result",
+          "tool": "warehouse",
+          "taskId": "H03-overdue:task:2",
+          "attempt": 1,
+          "recordIds": [
+            "W104"
+          ],
+          "replacedRecordIds": [],
+          "retrieval": "fixture_snapshot"
+        },
+        {
+          "role": "investigator",
+          "event": "cause_proposal",
+          "round": 1,
+          "choice": "overdue",
+          "requestedModel": "nvidia/nemotron-3.5-lightning-30b-a3b",
+          "reportedModel": "nvidia/nemotron-3.5-lightning-30b-a3b",
+          "fromCache": false,
+          "receiptId": "rcpt_req_r0pdjfes"
+        },
+        {
+          "role": "verifier",
+          "event": "model_critique",
+          "round": 1,
+          "choice": "accept",
+          "requestedModel": "nvidia/nemotron-3.5-lightning-30b-a3b",
+          "reportedModel": "nvidia/nemotron-3.5-lightning-30b-a3b",
+          "fromCache": false,
+          "receiptId": "rcpt_req_4n0di4l8",
+          "assessedCause": "overdue",
+          "evidenceGate": {
+            "supported": true,
+            "reason": "Consistent with current evidence gate"
+          }
+        }
+      ]
+    },
+    {
+      "id": "H04-newer-handoff",
+      "passed": true,
+      "expected": {
+        "cause": "none",
+        "risk": "on_track",
+        "action": null
+      },
+      "actual": {
+        "cause": "none",
+        "risk": "on_track",
+        "action": null
+      },
+      "ms": 4835,
+      "modelExecution": {
+        "successfulDecisions": 1,
+        "failedDecisions": 0,
+        "successfulPlanningDecisions": 0,
+        "failedPlanningDecisions": 0
+      },
+      "review": {
+        "status": "model_agreement",
+        "rounds": 1,
+        "proposals": 1,
+        "critiques": 1,
+        "errors": 0
+      },
+      "workflow": {
+        "sourceAttempts": {
+          "carrier": 1,
+          "warehouse": 1,
+          "inventory": 0
+        },
+        "retrievals": 2,
+        "recoveryAttempts": 0,
+        "rejectedPlans": 0,
+        "tasks": [
+          {
+            "id": "H04-newer-handoff:task:1",
+            "source": "carrier",
+            "attempt": 1,
+            "mode": "initial",
+            "reason": "Establish current handoff evidence; inventory is not needed until a stockout is supported",
+            "status": "completed"
+          },
+          {
+            "id": "H04-newer-handoff:task:2",
+            "source": "warehouse",
+            "attempt": 1,
+            "mode": "initial",
+            "reason": "Establish current handoff evidence; inventory is not needed until a stockout is supported",
+            "status": "completed"
+          }
+        ],
+        "status": "resolved"
+      },
+      "trace": [
+        {
+          "role": "investigator",
+          "event": "model_decision",
+          "tool": "carrier",
+          "reason": "Nightshift selected the carrier tool",
+          "requestedModel": "nvidia/nemotron-3.5-lightning-30b-a3b",
+          "reportedModel": "nvidia/nemotron-3.5-lightning-30b-a3b",
+          "fromCache": false,
+          "receiptId": "rcpt_req_u7b7kct6"
+        },
+        {
+          "role": "planner",
+          "event": "task_created",
+          "taskId": "H04-newer-handoff:task:1",
+          "source": "carrier",
+          "attempt": 1,
+          "reason": "Establish current handoff evidence; inventory is not needed until a stockout is supported"
+        },
+        {
+          "role": "executor",
+          "event": "tool_result",
+          "tool": "carrier",
+          "taskId": "H04-newer-handoff:task:1",
+          "attempt": 1,
+          "recordIds": [
+            "C101",
+            "CC"
+          ],
+          "replacedRecordIds": [],
+          "retrieval": "fixture_snapshot"
+        },
+        {
+          "role": "investigator",
+          "event": "provisional_hypothesis",
+          "hypothesis": "A carrier label does not establish custody. Obtain current warehouse evidence before assigning cause."
+        },
+        {
+          "role": "planner",
+          "event": "task_created",
+          "taskId": "H04-newer-handoff:task:2",
+          "source": "warehouse",
+          "attempt": 1,
+          "reason": "Establish current handoff evidence; inventory is not needed until a stockout is supported"
+        },
+        {
+          "role": "executor",
+          "event": "tool_result",
+          "tool": "warehouse",
+          "taskId": "H04-newer-handoff:task:2",
+          "attempt": 1,
+          "recordIds": [
+            "WC",
+            "W101"
+          ],
+          "replacedRecordIds": [],
+          "retrieval": "fixture_snapshot"
+        },
+        {
+          "role": "investigator",
+          "event": "cause_proposal",
+          "round": 1,
+          "choice": "on_track",
+          "requestedModel": "nvidia/nemotron-3.5-lightning-30b-a3b",
+          "reportedModel": "nvidia/nemotron-3.5-lightning-30b-a3b",
+          "fromCache": false,
+          "receiptId": "rcpt_req_1us1se0u"
+        },
+        {
+          "role": "verifier",
+          "event": "model_critique",
+          "round": 1,
+          "choice": "accept",
+          "requestedModel": "nvidia/nemotron-3.5-lightning-30b-a3b",
+          "reportedModel": "nvidia/nemotron-3.5-lightning-30b-a3b",
+          "fromCache": false,
+          "receiptId": "rcpt_req_v521cubb",
+          "assessedCause": "on_track",
+          "evidenceGate": {
+            "supported": true,
+            "reason": "Consistent with current evidence gate"
+          }
+        }
+      ]
+    },
+    {
+      "id": "H05-latest-carrier-conflict",
+      "passed": true,
+      "expected": {
+        "cause": "unverified",
+        "risk": "unknown",
+        "action": "request_evidence"
+      },
+      "actual": {
+        "cause": "unverified",
+        "risk": "unknown",
+        "action": "request_evidence"
+      },
+      "ms": 8054,
+      "modelExecution": {
+        "successfulDecisions": 1,
+        "failedDecisions": 0,
+        "successfulPlanningDecisions": 0,
+        "failedPlanningDecisions": 0
+      },
+      "review": {
+        "status": "deterministic_review_fallback",
+        "rounds": 2,
+        "proposals": 2,
+        "critiques": 2,
+        "errors": 0
+      },
+      "workflow": {
+        "sourceAttempts": {
+          "carrier": 2,
+          "warehouse": 1,
+          "inventory": 0
+        },
+        "retrievals": 3,
+        "recoveryAttempts": 0,
+        "rejectedPlans": 0,
+        "tasks": [
+          {
+            "id": "H05-latest-carrier-conflict:task:1",
+            "source": "carrier",
+            "attempt": 1,
+            "mode": "initial",
+            "reason": "Establish current handoff evidence; inventory is not needed until a stockout is supported",
+            "status": "completed"
+          },
+          {
+            "id": "H05-latest-carrier-conflict:task:2",
+            "source": "warehouse",
+            "attempt": 1,
+            "mode": "initial",
+            "reason": "Establish current handoff evidence; inventory is not needed until a stockout is supported",
+            "status": "completed"
+          },
+          {
+            "id": "H05-latest-carrier-conflict:task:3",
+            "source": "carrier",
+            "attempt": 2,
+            "mode": "refresh",
+            "reason": "carrier: conflict \u2014 Conflicting carrier records share the latest timestamp",
+            "status": "completed"
+          }
+        ],
+        "status": "escalated"
+      },
+      "trace": [
+        {
+          "role": "investigator",
+          "event": "model_decision",
+          "tool": "carrier",
+          "reason": "Nightshift selected the carrier tool",
+          "requestedModel": "nvidia/nemotron-3.5-lightning-30b-a3b",
+          "reportedModel": "nvidia/nemotron-3.5-lightning-30b-a3b",
+          "fromCache": false,
+          "receiptId": "rcpt_req_ipbla2fc"
+        },
+        {
+          "role": "planner",
+          "event": "task_created",
+          "taskId": "H05-latest-carrier-conflict:task:1",
+          "source": "carrier",
+          "attempt": 1,
+          "reason": "Establish current handoff evidence; inventory is not needed until a stockout is supported"
+        },
+        {
+          "role": "executor",
+          "event": "tool_result",
+          "tool": "carrier",
+          "taskId": "H05-latest-carrier-conflict:task:1",
+          "attempt": 1,
+          "recordIds": [
+            "C102",
+            "CX"
+          ],
+          "replacedRecordIds": [],
+          "retrieval": "fixture_snapshot"
+        },
+        {
+          "role": "planner",
+          "event": "task_created",
+          "taskId": "H05-latest-carrier-conflict:task:2",
+          "source": "warehouse",
+          "attempt": 1,
+          "reason": "Establish current handoff evidence; inventory is not needed until a stockout is supported"
+        },
+        {
+          "role": "executor",
+          "event": "tool_result",
+          "tool": "warehouse",
+          "taskId": "H05-latest-carrier-conflict:task:2",
+          "attempt": 1,
+          "recordIds": [
+            "W102"
+          ],
+          "replacedRecordIds": [],
+          "retrieval": "fixture_snapshot"
+        },
+        {
+          "role": "evaluator",
+          "event": "evidence_rejected",
+          "issues": [
+            {
+              "source": "carrier",
+              "code": "conflict",
+              "reason": "Conflicting carrier records share the latest timestamp"
+            }
+          ]
+        },
+        {
+          "role": "planner",
+          "event": "task_created",
+          "taskId": "H05-latest-carrier-conflict:task:3",
+          "source": "carrier",
+          "attempt": 2,
+          "reason": "carrier: conflict \u2014 Conflicting carrier records share the latest timestamp"
+        },
+        {
+          "role": "executor",
+          "event": "tool_result",
+          "tool": "carrier",
+          "taskId": "H05-latest-carrier-conflict:task:3",
+          "attempt": 2,
+          "recordIds": [
+            "C102",
+            "CX"
+          ],
+          "replacedRecordIds": [
+            "C102",
+            "CX"
+          ],
+          "retrieval": "fixture_snapshot"
+        },
+        {
+          "role": "evaluator",
+          "event": "evidence_rejected",
+          "issues": [
+            {
+              "source": "carrier",
+              "code": "conflict",
+              "reason": "Conflicting carrier records share the latest timestamp"
+            }
+          ]
+        },
+        {
+          "role": "controller",
+          "event": "evidence_escalated",
+          "reason": "Required evidence remains unresolved after two attempts per source"
+        },
+        {
+          "role": "investigator",
+          "event": "cause_proposal",
+          "round": 1,
+          "choice": "carrier_delay",
+          "requestedModel": "nvidia/nemotron-3.5-lightning-30b-a3b",
+          "reportedModel": "nvidia/nemotron-3.5-lightning-30b-a3b",
+          "fromCache": false,
+          "receiptId": "rcpt_req_mx3mib3b"
+        },
+        {
+          "role": "verifier",
+          "event": "model_critique",
+          "round": 1,
+          "choice": "accept",
+          "requestedModel": "nvidia/nemotron-3.5-lightning-30b-a3b",
+          "reportedModel": "nvidia/nemotron-3.5-lightning-30b-a3b",
+          "fromCache": false,
+          "receiptId": "rcpt_req_dhl3qlbh",
+          "assessedCause": "carrier_delay",
+          "evidenceGate": {
+            "supported": false,
+            "reason": "Proposal conflicts with current source evidence. Recheck missing/stale/conflicting observations and the handoff state; revise using source facts."
+          }
+        },
+        {
+          "role": "verifier",
+          "event": "revision_requested",
+          "round": 1,
+          "feedback": {
+            "priorProposal": "carrier_delay",
+            "verdict": "reject",
+            "reason": "Proposal conflicts with current source evidence. Recheck missing/stale/conflicting observations and the handoff state; revise using source facts.",
+            "reviewerVerdict": "accept"
+          }
+        },
+        {
+          "role": "investigator",
+          "event": "cause_proposal",
+          "round": 2,
+          "choice": "carrier_delay",
+          "requestedModel": "nvidia/nemotron-3.5-lightning-30b-a3b",
+          "reportedModel": "nvidia/nemotron-3.5-lightning-30b-a3b",
+          "fromCache": false,
+          "receiptId": "rcpt_req_oufc8jvw"
+        },
+        {
+          "role": "verifier",
+          "event": "model_critique",
+          "round": 2,
+          "choice": "accept",
+          "requestedModel": "nvidia/nemotron-3.5-lightning-30b-a3b",
+          "reportedModel": "nvidia/nemotron-3.5-lightning-30b-a3b",
+          "fromCache": false,
+          "receiptId": "rcpt_req_193yu9eh",
+          "assessedCause": "carrier_delay",
+          "evidenceGate": {
+            "supported": false,
+            "reason": "Proposal conflicts with current source evidence. Recheck missing/stale/conflicting observations and the handoff state; revise using source facts."
+          }
+        },
+        {
+          "role": "verifier",
+          "event": "revision_requested",
+          "round": 2,
+          "feedback": {
+            "priorProposal": "carrier_delay",
+            "verdict": "reject",
+            "reason": "Proposal conflicts with current source evidence. Recheck missing/stale/conflicting observations and the handoff state; revise using source facts.",
+            "reviewerVerdict": "accept"
+          }
+        },
+        {
+          "role": "controller",
+          "event": "review_fallback",
+          "reason": "Bounded model review did not converge. Final classification uses the deterministic evidence gate; no model agreement claimed."
+        }
+      ]
+    },
+    {
+      "id": "H06-short-recovery-window",
+      "passed": true,
+      "expected": {
+        "cause": "warehouse_stockout",
+        "risk": "at_risk",
+        "action": "escalate_stockout"
+      },
+      "actual": {
+        "cause": "warehouse_stockout",
+        "risk": "at_risk",
+        "action": "escalate_stockout"
+      },
+      "ms": 4747,
+      "modelExecution": {
+        "successfulDecisions": 1,
+        "failedDecisions": 0,
+        "successfulPlanningDecisions": 0,
+        "failedPlanningDecisions": 0
+      },
+      "review": {
+        "status": "model_agreement",
+        "rounds": 1,
+        "proposals": 1,
+        "critiques": 1,
+        "errors": 0
+      },
+      "workflow": {
+        "sourceAttempts": {
+          "carrier": 1,
+          "warehouse": 1,
+          "inventory": 1
+        },
+        "retrievals": 3,
+        "recoveryAttempts": 1,
+        "rejectedPlans": 1,
+        "tasks": [
+          {
+            "id": "H06-short-recovery-window:task:1",
+            "source": "carrier",
+            "attempt": 1,
+            "mode": "initial",
+            "reason": "Establish current handoff evidence; inventory is not needed until a stockout is supported",
+            "status": "completed"
+          },
+          {
+            "id": "H06-short-recovery-window:task:2",
+            "source": "warehouse",
+            "attempt": 1,
+            "mode": "initial",
+            "reason": "Establish current handoff evidence; inventory is not needed until a stockout is supported",
+            "status": "completed"
+          },
+          {
+            "id": "H06-short-recovery-window:task:3",
+            "source": "inventory",
+            "attempt": 1,
+            "mode": "initial",
+            "reason": "Supported warehouse stockout: obtain recovery candidates",
+            "status": "completed"
+          }
+        ],
+        "status": "escalated"
+      },
+      "trace": [
+        {
+          "role": "investigator",
+          "event": "model_decision",
+          "tool": "carrier",
+          "reason": "Nightshift selected the carrier tool",
+          "requestedModel": "nvidia/nemotron-3.5-lightning-30b-a3b",
+          "reportedModel": "nvidia/nemotron-3.5-lightning-30b-a3b",
+          "fromCache": false,
+          "receiptId": "rcpt_req_8sbtzyxg"
+        },
+        {
+          "role": "planner",
+          "event": "task_created",
+          "taskId": "H06-short-recovery-window:task:1",
+          "source": "carrier",
+          "attempt": 1,
+          "reason": "Establish current handoff evidence; inventory is not needed until a stockout is supported"
+        },
+        {
+          "role": "executor",
+          "event": "tool_result",
+          "tool": "carrier",
+          "taskId": "H06-short-recovery-window:task:1",
+          "attempt": 1,
+          "recordIds": [
+            "C101"
+          ],
+          "replacedRecordIds": [],
+          "retrieval": "fixture_snapshot"
+        },
+        {
+          "role": "investigator",
+          "event": "provisional_hypothesis",
+          "hypothesis": "A carrier label does not establish custody. Obtain current warehouse evidence before assigning cause."
+        },
+        {
+          "role": "planner",
+          "event": "task_created",
+          "taskId": "H06-short-recovery-window:task:2",
+          "source": "warehouse",
+          "attempt": 1,
+          "reason": "Establish current handoff evidence; inventory is not needed until a stockout is supported"
+        },
+        {
+          "role": "executor",
+          "event": "tool_result",
+          "tool": "warehouse",
+          "taskId": "H06-short-recovery-window:task:2",
+          "attempt": 1,
+          "recordIds": [
+            "W101"
+          ],
+          "replacedRecordIds": [],
+          "retrieval": "fixture_snapshot"
+        },
+        {
+          "role": "verifier",
+          "event": "hypothesis_revised",
+          "from": "possible carrier delay",
+          "to": "warehouse_stockout",
+          "evidence": [
+            "C101",
+            "W101"
+          ]
+        },
+        {
+          "role": "investigator",
+          "event": "cause_proposal",
+          "round": 1,
+          "choice": "stockout",
+          "requestedModel": "nvidia/nemotron-3.5-lightning-30b-a3b",
+          "reportedModel": "nvidia/nemotron-3.5-lightning-30b-a3b",
+          "fromCache": false,
+          "receiptId": "rcpt_req_oj1ahda0"
+        },
+        {
+          "role": "verifier",
+          "event": "model_critique",
+          "round": 1,
+          "choice": "accept",
+          "requestedModel": "nvidia/nemotron-3.5-lightning-30b-a3b",
+          "reportedModel": "nvidia/nemotron-3.5-lightning-30b-a3b",
+          "fromCache": false,
+          "receiptId": "rcpt_req_emak65p5",
+          "assessedCause": "stockout",
+          "evidenceGate": {
+            "supported": true,
+            "reason": "Consistent with current evidence gate"
+          }
+        },
+        {
+          "role": "planner",
+          "event": "task_created",
+          "taskId": "H06-short-recovery-window:task:3",
+          "source": "inventory",
+          "attempt": 1,
+          "reason": "Supported warehouse stockout: obtain recovery candidates"
+        },
+        {
+          "role": "executor",
+          "event": "tool_result",
+          "tool": "inventory",
+          "taskId": "H06-short-recovery-window:task:3",
+          "attempt": 1,
+          "recordIds": [
+            "I101"
+          ],
+          "replacedRecordIds": [],
+          "retrieval": "fixture_snapshot"
+        },
+        {
+          "role": "planner",
+          "event": "recovery_proposed",
+          "attempt": 1,
+          "generation": 1,
+          "warehouse": "West",
+          "recordId": "I101",
+          "quantity": 4
+        },
+        {
+          "role": "evaluator",
+          "event": "recovery_rejected",
+          "attempt": 1,
+          "warehouse": "West",
+          "recordId": "I101",
+          "observedAt": "2026-10-23T16:30:00Z",
+          "reasons": [
+            {
+              "code": "promise_infeasible",
+              "detail": "Transfer plus assumed 8h handling/delivery buffer exceeds the promise"
+            }
+          ]
+        },
+        {
+          "role": "planner",
+          "event": "replan_requested",
+          "avoidWarehouse": "West",
+          "instructions": [
+            "Transfer plus assumed 8h handling/delivery buffer exceeds the promise"
+          ],
+          "remainingCandidates": 0
+        },
+        {
+          "role": "controller",
+          "event": "recovery_escalated",
+          "reason": "Recovery candidates exhausted or evidence budget reached"
+        }
+      ]
+    }
+  ]
+}

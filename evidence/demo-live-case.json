@@ -1,0 +1,229 @@
+{
+  "synthetic": true,
+  "sourceTransport": "Zetaris JDBC",
+  "durationSeconds": 18.265,
+  "case": {
+    "review": {
+      "status": "model_agreement",
+      "rounds": 1,
+      "proposals": 1,
+      "critiques": 1,
+      "errors": 0
+    },
+    "modelExecution": {
+      "successfulDecisions": 3,
+      "failedDecisions": 0
+    },
+    "orderId": "SR-101",
+    "quantity": 4,
+    "promisedAt": "2026-10-24T17:00:00Z",
+    "sku": "PUMP-A",
+    "priority": 1,
+    "mode": "nightshift_with_deterministic_verification",
+    "synthetic": true,
+    "asOf": "2026-10-23T17:00:00Z",
+    "risk": "at_risk",
+    "cause": "warehouse_stockout",
+    "summary": "Warehouse reports a stockout and the carrier has only a label; there is no evidence of carrier custody.",
+    "citations": [
+      "C101",
+      "W101"
+    ],
+    "gaps": [],
+    "actions": [
+      {
+        "type": "request_stock_reservation",
+        "status": "draft_requires_review",
+        "title": "Request 4 units from West",
+        "evidence": [
+          "C101",
+          "W101",
+          "I101"
+        ],
+        "detail": "Batch proposal: 7 units before this allocation, 3 after. Estimated 8h transfer plus an assumed 8h handling/delivery buffer. Confirm capacity, cutoffs and transit before commitment; no stock is reserved."
+      }
+    ],
+    "evidence": [
+      {
+        "id": "I101",
+        "sku": "PUMP-A",
+        "warehouse": "West",
+        "available": 7,
+        "transferHours": 8,
+        "observedAt": "2026-10-23T16:30:00Z",
+        "source": "inventory"
+      },
+      {
+        "id": "C101",
+        "orderId": "SR-101",
+        "status": "label_created",
+        "eta": "2026-10-26T17:00:00Z",
+        "observedAt": "2026-10-23T16:00:00Z",
+        "source": "carrier"
+      },
+      {
+        "id": "W101",
+        "orderId": "SR-101",
+        "status": "stockout",
+        "reserved": 0,
+        "observedAt": "2026-10-23T16:30:00Z",
+        "source": "warehouse"
+      }
+    ],
+    "trace": [
+      {
+        "role": "memory",
+        "event": "recall",
+        "context": "[MEMORY CONTEXT]\n## general\n- [WK] PUMP-A shipment SR-101: Warehouse reports a stockout and the carrier has only a label; there is no evidence of carrier custody. (entities: pump, warehouse) <mem-11>\n- [WK] PUMP-A shipment SR-101: Warehouse reports a stockout and the carrier has only a label; there is no evidence of carrier custody. (entities: pump, warehouse) <mem-2>\n- [WK] PUMP-A shipment SR-101: Warehouse reports a stockout and the carrier has only a label; there is no evidence of carrier custody. (entities: pump, warehouse) <mem-3>\n- [WK] PUMP-A shipment SR-101: Warehouse reports a stockout and the carrier has only a label; there is no evidence of carrier custody. (entities: pump, warehouse) <mem-4>\n- [WK] PUMP-A shipment SR-101: Warehouse reports a stockout and the carrier has only a label; there is no evidence of carrier custody. (entities: pump, warehouse) <mem-1>\n[/MEMORY CONTEXT]",
+        "ids": [
+          "mem-11",
+          "mem-2",
+          "mem-3",
+          "mem-4",
+          "mem-1"
+        ]
+      },
+      {
+        "role": "investigator",
+        "event": "model_decision",
+        "tool": "inventory",
+        "reason": "Nightshift selected the inventory tool",
+        "requestedModel": "nvidia/nemotron-3.5-lightning-30b-a3b",
+        "reportedModel": "nvidia/nemotron-3.5-lightning-30b-a3b",
+        "fromCache": false,
+        "receiptId": "rcpt_req_a8d02n6p"
+      },
+      {
+        "role": "executor",
+        "event": "tool_result",
+        "tool": "inventory",
+        "recordIds": [
+          "I101"
+        ]
+      },
+      {
+        "role": "investigator",
+        "event": "model_decision",
+        "tool": "carrier",
+        "reason": "Nightshift selected the carrier tool",
+        "requestedModel": "nvidia/nemotron-3.5-lightning-30b-a3b",
+        "reportedModel": "nvidia/nemotron-3.5-lightning-30b-a3b",
+        "fromCache": false,
+        "receiptId": "rcpt_req_s0o6jf7p"
+      },
+      {
+        "role": "executor",
+        "event": "tool_result",
+        "tool": "carrier",
+        "recordIds": [
+          "C101"
+        ]
+      },
+      {
+        "role": "investigator",
+        "event": "provisional_hypothesis",
+        "hypothesis": "Carrier feed indicates delay, but label creation does not prove carrier custody. Check warehouse before assigning cause."
+      },
+      {
+        "role": "investigator",
+        "event": "model_decision",
+        "tool": "warehouse",
+        "reason": "Nightshift selected the warehouse tool",
+        "requestedModel": "nvidia/nemotron-3.5-lightning-30b-a3b",
+        "reportedModel": "nvidia/nemotron-3.5-lightning-30b-a3b",
+        "fromCache": false,
+        "receiptId": "rcpt_req_dp4t4jqf"
+      },
+      {
+        "role": "executor",
+        "event": "tool_result",
+        "tool": "warehouse",
+        "recordIds": [
+          "W101"
+        ]
+      },
+      {
+        "role": "verifier",
+        "event": "hypothesis_revised",
+        "from": "possible carrier delay",
+        "to": "warehouse_stockout",
+        "evidence": [
+          "W101",
+          "C101"
+        ]
+      },
+      {
+        "role": "investigator",
+        "event": "cause_proposal",
+        "round": 1,
+        "choice": "stockout",
+        "requestedModel": "nvidia/nemotron-3.5-lightning-30b-a3b",
+        "reportedModel": "nvidia/nemotron-3.5-lightning-30b-a3b",
+        "fromCache": false,
+        "receiptId": "rcpt_req_i1szdzw4"
+      },
+      {
+        "role": "verifier",
+        "event": "model_critique",
+        "round": 1,
+        "choice": "accept",
+        "requestedModel": "nvidia/nemotron-3.5-lightning-30b-a3b",
+        "reportedModel": "nvidia/nemotron-3.5-lightning-30b-a3b",
+        "fromCache": false,
+        "receiptId": "rcpt_req_4fmlj7gq",
+        "assessedCause": "stockout",
+        "evidenceGate": {
+          "supported": true,
+          "reason": "Consistent with current evidence gate"
+        }
+      },
+      {
+        "role": "planner",
+        "event": "draft_capacity_allocated",
+        "status": "proposed_only",
+        "poolKey": "[\"PUMP-A\",\"West\"]",
+        "quantity": 4,
+        "availableBefore": 7,
+        "availableAfter": 3,
+        "recordId": "I101"
+      }
+    ],
+    "memory": {
+      "engine": "Meterless H-MEM reference",
+      "recalled": [
+        {
+          "id": "mem-11",
+          "content": "PUMP-A shipment SR-101: Warehouse reports a stockout and the carrier has only a label; there is no evidence of carrier custody.",
+          "relevance": 0.370486598196378
+        },
+        {
+          "id": "mem-2",
+          "content": "PUMP-A shipment SR-101: Warehouse reports a stockout and the carrier has only a label; there is no evidence of carrier custody.",
+          "relevance": 0.37048648562136055
+        },
+        {
+          "id": "mem-3",
+          "content": "PUMP-A shipment SR-101: Warehouse reports a stockout and the carrier has only a label; there is no evidence of carrier custody.",
+          "relevance": 0.37048648562136055
+        },
+        {
+          "id": "mem-4",
+          "content": "PUMP-A shipment SR-101: Warehouse reports a stockout and the carrier has only a label; there is no evidence of carrier custody.",
+          "relevance": 0.37048648562136055
+        },
+        {
+          "id": "mem-1",
+          "content": "PUMP-A shipment SR-101: Warehouse reports a stockout and the carrier has only a label; there is no evidence of carrier custody.",
+          "relevance": 0.37048648558830866
+        }
+      ]
+    },
+    "draftAllocation": {
+      "status": "proposed_only",
+      "poolKey": "[\"PUMP-A\",\"West\"]",
+      "quantity": 4,
+      "availableBefore": 7,
+      "availableAfter": 3
+    }
+  }
+}

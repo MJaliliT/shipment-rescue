@@ -1,0 +1,11 @@
+{
+  "createdAt": "2026-10-23T18:18:47.393Z",
+  "synthetic": true,
+  "sourceTransport": "in-memory evaluation fixtures; not live Zetaris retrieval",
+  "scope": "12 additional rule cases",
+  "protocolHash": "c4e07efc7bcfe1d0ec4bb2a055f77c70d2255fe9c9011030a605ce1689b4ee4f",
+  "live": false,
+  "elapsedMs": 9,
+  "passed": 12,
+  "total": 12
+}

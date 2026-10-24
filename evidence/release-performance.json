@@ -1,0 +1,102 @@
+{
+  "synthetic": true,
+  "sourceTransport": "Zetaris JDBC",
+  "modelTransport": "Nightshift",
+  "thinking": "off",
+  "requestedModel": "nvidia/nemotron-3.5-lightning-30b-a3b",
+  "scope": "three sequential repeats of one synthetic stockout; warm local services and memory; not generalization or p95",
+  "runs": [
+    {
+      "run": 1,
+      "elapsedSeconds": 15.04,
+      "exitCode": 0,
+      "cause": "warehouse_stockout",
+      "modelExecution": {
+        "successfulDecisions": 3,
+        "failedDecisions": 0
+      },
+      "review": "not_requested",
+      "modelIds": [
+        "nvidia/nemotron-3.5-lightning-30b-a3b",
+        "nvidia/nemotron-3.5-lightning-30b-a3b",
+        "nvidia/nemotron-3.5-lightning-30b-a3b"
+      ],
+      "receiptIds": [
+        "rcpt_req_heqn2kv9",
+        "rcpt_req_jfbj7tsv",
+        "rcpt_req_ryd4ag53"
+      ],
+      "cacheFlags": [
+        false,
+        false,
+        false
+      ]
+    },
+    {
+      "run": 2,
+      "elapsedSeconds": 16.621,
+      "exitCode": 0,
+      "cause": "warehouse_stockout",
+      "modelExecution": {
+        "successfulDecisions": 3,
+        "failedDecisions": 0
+      },
+      "review": "not_requested",
+      "modelIds": [
+        "nvidia/nemotron-3.5-lightning-30b-a3b",
+        "nvidia/nemotron-3.5-lightning-30b-a3b",
+        "nvidia/nemotron-3.5-lightning-30b-a3b"
+      ],
+      "receiptIds": [
+        "rcpt_req_4bfle7f7",
+        "rcpt_req_1bobl9wo",
+        "rcpt_req_5n38k06a"
+      ],
+      "cacheFlags": [
+        false,
+        false,
+        false
+      ]
+    },
+    {
+      "run": 3,
+      "elapsedSeconds": 16.1,
+      "exitCode": 0,
+      "cause": "warehouse_stockout",
+      "modelExecution": {
+        "successfulDecisions": 3,
+        "failedDecisions": 0
+      },
+      "review": "not_requested",
+      "modelIds": [
+        "nvidia/nemotron-3.5-lightning-30b-a3b",
+        "nvidia/nemotron-3.5-lightning-30b-a3b",
+        "nvidia/nemotron-3.5-lightning-30b-a3b"
+      ],
+      "receiptIds": [
+        "rcpt_req_m6d3ujnq",
+        "rcpt_req_qy9votx2",
+        "rcpt_req_im1uwdck"
+      ],
+      "cacheFlags": [
+        false,
+        false,
+        false
+      ]
+    }
+  ],
+  "sourceSha256": {
+    "src/allocation.ts": "c84bad4328fa3df864590e4b824cfc37cf678e1563935ce80bb10299d33e4f77",
+    "src/cli.ts": "545e5a89f70a10497e46dee573cf0a9a9854d863be3176ac62a9b95931720575",
+    "src/engine.ts": "e68c225740b4fd6e215776c94b5a2212c72f71498d4904cd104e4de8ddbb6413",
+    "src/providers.ts": "7e1c6ff55e1b18189bfaebb4d69600c0fcc80c3e60c39f502482c23345424ead",
+    "src/review.ts": "c42d93a0008741d2f2e6d7cda64101af6ef0f545e0ea35e5bcbb127726c37602",
+    "src/zetaris.ts": "323f39ad03772c5f724ad8394e966f76b74f42bad8384eaa70227366d6a90d67"
+  },
+  "demoGate": {
+    "maxSeconds": 60,
+    "expectedCause": "warehouse_stockout",
+    "requiredToolFallbacks": 0,
+    "passed": true
+  }
+}

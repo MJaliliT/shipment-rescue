@@ -1,0 +1,5 @@
+id,sku,warehouse,available,transferHours,observedAt
+I101,PUMP-A,West,7,8,2026-10-23T16:30:00Z
+I102,VALVE-B,West,4,6,2026-10-23T16:30:00Z
+I103,FILTER-C,West,10,4,2026-10-20T16:30:00Z
+I105,SEAL-D,West,1,8,2026-10-23T16:30:00Z

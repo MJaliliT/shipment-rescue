@@ -1,0 +1,6 @@
+id,orderId,status,reserved,observedAt
+W101,SR-101,stockout,0,2026-10-23T16:30:00Z
+W102,SR-102,dispatched,2,2026-10-23T15:00:00Z
+W103,SR-103,picking,3,2026-10-20T15:00:00Z
+W104,SR-104,dispatched,2,2026-10-23T15:00:00Z
+W105,SR-105,stockout,0,2026-10-23T16:30:00Z

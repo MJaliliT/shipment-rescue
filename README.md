@@ -1,6 +1,6 @@
 # Shipment Rescue
 
-**Team AION · Mohammad Jalili Torkamani**
+**Team Shipment Rescue · Mohammad Jalili Torkamani**
 
 An operations investigation prototype that connects handoff evidence to a reviewable recovery draft. The controller refreshes only evidence rejected by the validator, obtains inventory only for supported stockouts, and sends rejected recovery candidates back to the planner.
 

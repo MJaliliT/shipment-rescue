@@ -2,19 +2,39 @@
 
 **Team Shipment Rescue · Mohammad Jalili Torkamani**
 
+## What we built
+
 An operations investigation prototype that connects handoff evidence to a reviewable recovery draft. The controller refreshes only evidence rejected by the validator, obtains inventory only for supported stockouts, and sends rejected recovery candidates back to the planner.
 
 **Status:** 43 tests and 12 baseline regression scenarios pass. Three adaptive cases were exercised through real Zetaris queries and through Zetaris + Nightshift/Nemotron. All operational records are synthetic. This is a single-user prototype; no stock is reserved, carrier action executed or message sent.
 
-## Credential-free setup
+## Data used
 
-Requires Node 20.6+ and npm:
+All shipment and inventory records are developer-authored synthetic demonstration data, not customer records or evidence of measured business impact.
+
+| Included data | Purpose |
+| --- | --- |
+| [`data/cases.json`](data/cases.json) | Five original cases combining orders, carrier events, warehouse handoffs and inventory. |
+| [`data/adaptive-cases.json`](data/adaptive-cases.json) | Three adaptive cases, including explicitly supplied initial and refreshed observations. |
+| [`data/zetaris/`](data/zetaris/) | Synthetic orders, carrier, warehouse and inventory CSV tables for the original Zetaris-connected demo. |
+| [`data/zetaris-adaptive/`](data/zetaris-adaptive/) | Adaptive CSV tables, including `warehouse_updates.csv` for evidence refresh. |
+| [`evidence/`](evidence/) | Saved synthetic execution results and model traces from previous connected runs. |
+
+The credential-free demo reads the included JSON fixtures locally. The connected feature queries the registered CSV-backed tables through Zetaris JDBC. These are separate execution modes; running the local demo does not establish a live Zetaris or model connection.
+
+## Run the demo without credentials
+
+Requires Git, Node 20.6+ and npm. No API key, account, environment file, Java, Docker, Zetaris installation or Nightshift runtime is needed for this local demo. Internet access is needed to clone the public repository and install npm dependencies.
 
 ```sh
+git clone https://github.com/MJaliliT/shipment-rescue.git
+cd shipment-rescue
 npm ci
 npm run verify
 npm run adaptive
 ```
+
+Expected result: 43 tests and 12 baseline cases pass. The adaptive demo produces AD-201 (stockout; West rejected, East proposed), AD-202 (on track; inventory skipped), and AD-203 (insufficient evidence; escalation). This mode makes deterministic decisions and performs no hosted model calls.
 
 `verify` runs tests, baseline evaluation, the five-case original demo and the three-case adaptive demo. Open `runs/report.html` for the latest report; `runs/latest.json` includes evidence, workflow state and full traces. The report supports status filters, order/SKU search, evidence tables, draft-text selection, warehouse feasibility comparison and an investigation activity trail. Operators can save a disposition and handoff note in browser storage and export a JSON packet containing the source evidence, proposed actions and review. Each review belongs to an exact report fingerprint. This is a local review record, not an authenticated approval or stock reservation. Operator controls have automated coverage; full browser usability testing remains pending.
 
